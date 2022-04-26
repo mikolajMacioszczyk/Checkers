@@ -8,6 +8,7 @@ namespace Checkers.Models
         public int Size { get; private set; }
         public int FiguresCount { get; private set; }
         public List<Figure> Killed { get; set; }
+        public List<Figure> AliveFigures { get; set; }
 
         #region Reset
 
@@ -16,6 +17,7 @@ namespace Checkers.Models
             Size = size;
             FiguresCount = figuresCount;
             Killed = new List<Figure>();
+            AliveFigures = new List<Figure>();
 
             InitializePositions();
 
@@ -51,16 +53,18 @@ namespace Checkers.Models
                 {
                     if (IsPositionEnabled(row, column))
                     {
-                        Positions[row, column].Figure = new Man(color);
+                        Figure man = color == FigureColor.White ? new WhiteMan() : new BlackKing();
+                        AliveFigures.Add(man);
+                        Positions[row, column].Figure = man;
                     }
                 }
             }
         }
 
+        #endregion
+        
         public bool IsPositionEnabled(int row, int col) => (row + col) % 2 == 1;
 
-
-        #endregion
 
         public Position FindFigure(Figure figure)
         {
@@ -78,6 +82,8 @@ namespace Checkers.Models
         public void MarkKilled(Position position)
         {
             Killed.Add(position.Figure);
+            AliveFigures.Remove(position.Figure);
+
             position.Figure = null;
         }
     }

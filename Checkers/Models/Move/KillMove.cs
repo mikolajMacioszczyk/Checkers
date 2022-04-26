@@ -2,6 +2,8 @@
 {
     public class KillMove : NormalMove
     {
+        public KillMove(Position from, Position target) : base(from, target) { }
+
         public Move InnerMove { get; set; }
         public Position Killed { get; set; }
 

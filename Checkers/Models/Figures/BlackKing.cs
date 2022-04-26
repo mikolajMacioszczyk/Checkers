@@ -2,9 +2,9 @@
 
 namespace Checkers.Models
 {
-    public class Man : Figure
+    public class BlackKing : Figure
     {
-        public Man(FigureColor color) : base(color)
+        public BlackKing() : base(FigureColor.Black)
         {
         }
 

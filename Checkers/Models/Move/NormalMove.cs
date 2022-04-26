@@ -2,6 +2,8 @@
 {
     public class NormalMove : Move
     {
+        public NormalMove(Position from, Position target) : base(from, target) {}
+
         public override void MakeMove(Board board)
         {
             // TODO: Only Debug
