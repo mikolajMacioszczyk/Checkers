@@ -8,7 +8,7 @@ namespace Checkers.Models
         {
         }
 
-        public override List<Move> GetAvailableMoves(Board board)
+        public override List<MoveBase> GetAvailableMoves(Board board)
         {
             throw new NotImplementedException();
         }

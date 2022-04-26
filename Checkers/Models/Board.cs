@@ -21,7 +21,7 @@ namespace Checkers.Models
 
             InitializePositions();
 
-            var figuresRows = FiguresCount / (2 * Size);
+            var figuresRows = FiguresCount * 2 / Size;
             // initialize White
             InitializeFigures(0, figuresRows, FigureColor.White);
 
