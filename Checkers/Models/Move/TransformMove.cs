@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Checkers.Models
+﻿namespace Checkers.Models
 {
-    public class TransformMove : Move
+    public class TransformMove : NormalMove
     {
         public override void MakeMove(Board board)
         {
-            throw new NotImplementedException();
+            base.MakeMove(board);
+            var newFigure = new King(Target.Figure.Color);
+            Target.Figure = newFigure;
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Checkers.Models
         public Position[,] Positions { get; private set; }
         public int Size { get; private set; }
         public int FiguresCount { get; private set; }
+        public List<Figure> Killed { get; set; }
 
         #region Reset
 
@@ -14,6 +15,7 @@ namespace Checkers.Models
         {
             Size = size;
             FiguresCount = figuresCount;
+            Killed = new List<Figure>();
 
             InitializePositions();
 
@@ -71,6 +73,12 @@ namespace Checkers.Models
             }
 
             return null;
+        }
+
+        public void MarkKilled(Position position)
+        {
+            Killed.Add(position.Figure);
+            position.Figure = null;
         }
     }
 }

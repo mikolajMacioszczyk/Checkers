@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Checkers.Models
+﻿namespace Checkers.Models
 {
-    public class KillMove : Move
+    public class KillMove : NormalMove
     {
+        public Move InnerMove { get; set; }
+        public Position Killed { get; set; }
+
         public override void MakeMove(Board board)
         {
-            throw new NotImplementedException();
+            base.MakeMove(board);
+
+            board.MarkKilled(Killed);
+            
+            InnerMove.MakeMove(board);
         }
     }
 }
