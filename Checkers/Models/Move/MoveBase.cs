@@ -1,11 +1,11 @@
 ﻿namespace Checkers.Models
 {
-    public abstract class Move
+    public abstract class MoveBase
     {
         public Position From { get; set; }
         public Position Target { get; set; }
 
-        public Move(Position from, Position target)
+        public MoveBase(Position from, Position target)
         {
             From = from;
             Target = target;

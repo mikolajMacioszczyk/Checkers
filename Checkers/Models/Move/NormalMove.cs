@@ -1,6 +1,6 @@
 ﻿namespace Checkers.Models
 {
-    public class NormalMove : Move
+    public class NormalMove : MoveBase
     {
         public NormalMove(Position from, Position target) : base(from, target) {}
 

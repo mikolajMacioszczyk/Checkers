@@ -12,6 +12,6 @@ namespace Checkers.Models
             Color = color;
         }
 
-        public abstract List<Move> GetAvailableMoves(Board board);
+        public abstract List<MoveBase> GetAvailableMoves(Board board);
     }
 }
