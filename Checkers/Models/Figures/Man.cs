@@ -12,8 +12,11 @@ namespace Checkers.Models
         {
             var moves = new List<MoveBase>();
 
-            TryAddNormalMoves(board, moves);
-            TryAddKillMoves(board, moves, new Stack<KillMove>(), CurrentPosition.Row, CurrentPosition.Column);
+            TryAddKillMoves(board, moves, new List<KillMove>(), CurrentPosition.Row, CurrentPosition.Column);
+            if (!moves.Any())
+            {
+                TryAddNormalMoves(board, moves);
+            }
 
             return moves;
         }
@@ -39,48 +42,49 @@ namespace Checkers.Models
             }
         }
 
-        protected void TryAddKillMoves(Board board, List<MoveBase> moves, Stack<KillMove> strike, int row, int column)
+        protected void TryAddKillMoves(Board board, List<MoveBase> moves, List<KillMove> strike, int row, int column)
         {
             bool isStopped = true;
+            var currentPosition = board.Positions[row, column];
 
             // try leftTop
             TryAddKillMove(row + 1, column - 1, row + 2, column - 2, ref isStopped,
-                (nextColumn, nextRow) => nextColumn >= 0 && nextRow < board.Size, board, moves, strike);
+                currentPosition, (nextColumn, nextRow) => nextColumn >= 0 && nextRow < board.Size, board, moves, strike);
 
             // try rightTop
             TryAddKillMove(row + 1, column + 1, row + 2, column + 2, ref isStopped,
-                (nextColumn, nextRow) => nextColumn < board.Size && nextRow < board.Size, board, moves, strike);
+                currentPosition, (nextColumn, nextRow) => nextColumn < board.Size && nextRow < board.Size, board, moves, strike);
 
             // try leftDown
             TryAddKillMove(row - 1, column - 1, row - 2, column - 2, ref isStopped,
-                (nextColumn, nextRow) => nextColumn >= 0 && nextRow >= 0, board, moves, strike);
+                currentPosition, (nextColumn, nextRow) => nextColumn >= 0 && nextRow >= 0, board, moves, strike);
 
             // try rightDown
             TryAddKillMove(row - 1, column + 1, row - 2, column + 2, ref isStopped,
-                (nextColumn, nextRow) => nextColumn < board.Size && nextRow >= 0, board, moves, strike);
+                currentPosition, (nextColumn, nextRow) => nextColumn < board.Size && nextRow >= 0, board, moves, strike);
 
             // if movement is finished
             StopKillMove(isStopped, board, moves, strike);
         }
 
-        private void StopKillMove(bool isStopped, Board board, List<MoveBase> moves, Stack<KillMove> strike)
+        private void StopKillMove(bool isStopped, Board board, List<MoveBase> moves, List<KillMove> strike)
         {
             if (isStopped && strike.Any())
             {
-                var resultMove = strike.First().Copy();
-                var current = resultMove;
                 var last = strike.Last();
-                foreach (var nextMove in strike.Skip(1))
+                if (last.Target.Row == board.Size - 1 || last.Target.Row == 0)
                 {
                     // should also transform to King
-                    if (nextMove == last && nextMove.Target.Row == board.Size - 1)
-                    {
-                        current.InnerMove = new KillTransformMove(nextMove.From, nextMove.Target, nextMove.Killed);
-                    }
-                    else
-                    {
-                        current.InnerMove = nextMove.Copy();
-                    }
+                    strike.Remove(last);
+                    strike.Add(new KillTransformMove(last.From, last.Target, last.Killed));
+                }
+
+                var resultMove = strike.First().Copy();
+                var current = resultMove;
+                
+                foreach (var nextMove in strike.Skip(1))
+                {
+                    current.InnerMove = nextMove.Copy();
                     current = current.InnerMove;
                 }
                 moves.Add(resultMove);
@@ -88,7 +92,7 @@ namespace Checkers.Models
         }
 
         private void TryAddKillMove(int enemyRow, int enemyColumn, int nextRow, int nextColumn, ref bool isStopped,
-            Func<int, int, bool> predicate, Board board, List<MoveBase> moves, Stack<KillMove> strike)
+            Position currentPosition, Func<int, int, bool> predicate, Board board, List<MoveBase> moves, List<KillMove> strike)
         {
             if (predicate(nextColumn, nextRow))
             {
@@ -106,9 +110,9 @@ namespace Checkers.Models
                     {
                         // move is continued
                         isStopped = false;
-                        strike.Push(new KillMove(enemyPosition, nextPosition, enemyPosition));
+                        strike.Add(new KillMove(currentPosition, nextPosition, enemyPosition));
                         TryAddKillMoves(board, moves, strike, nextRow, nextColumn);
-                        strike.Pop();
+                        strike.RemoveAt(strike.Count - 1);
                     }
                 }
             }
