@@ -21,6 +21,11 @@
 
                 if (_figure != null)
                 {
+                    if (_figure.CurrentPosition != null)
+                    {
+                        _figure.CurrentPosition.Figure = null;
+                    }
+
                     _figure.CurrentPosition = this;
                 }
             }
