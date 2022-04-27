@@ -13,6 +13,15 @@
             Target.Figure = newFigure;
         }
 
+        public override void UndoMove(Board board)
+        {
+            Figure oldFigure = Target.Figure.Color == Enums.FigureColor.White ? new WhiteMan() : new BlackMan();
+
+            Target.Figure = oldFigure;
+
+            base.UndoMove(board);
+        }
+
         public override KillMove Copy()
         {
             return new KillTransformMove(From, Target, Killed) { InnerMove = InnerMove?.Copy(), Killed = Killed};

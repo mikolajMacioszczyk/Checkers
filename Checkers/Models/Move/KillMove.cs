@@ -11,13 +11,26 @@
         public KillMove InnerMove { get; set; }
         public Position Killed { get; set; }
 
+        private Figure KilledFigure;
+
         public override void MakeMove(Board board)
         {
             base.MakeMove(board);
 
+            KilledFigure = Killed.Figure;
             board.MarkKilled(Killed);
             
-            InnerMove.MakeMove(board);
+            InnerMove?.MakeMove(board);
+        }
+
+        public override void UndoMove(Board board)
+        {
+            InnerMove?.UndoMove(board);
+
+            board.RestoreKilled(KilledFigure, Killed);
+            KilledFigure = null;
+            
+            base.UndoMove(board);
         }
 
         public virtual KillMove Copy()

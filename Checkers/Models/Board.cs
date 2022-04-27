@@ -52,6 +52,25 @@ namespace Checkers.Models
             position.Figure = null;
         }
 
+        public void RestoreKilled(Figure figure, Position position)
+        {
+            // TODO: Only debug
+            if (!Killed.Contains(figure))
+            {
+                throw new InvalidOperationException(nameof(figure));
+            }
+
+            // TODO: Only debug
+            if (Positions[position.Row, position.Column].Figure != null)
+            {
+                throw new InvalidOperationException(nameof(position));
+            }
+
+            Killed.Remove(figure);
+            AliveFigures.Add(figure);
+            Positions[position.Row, position.Column].Figure = figure;
+        }
+
         public List<MoveBase> GetAllAvailableMoves(FigureColor forColor)
         {
             var moves = new List<MoveBase>();

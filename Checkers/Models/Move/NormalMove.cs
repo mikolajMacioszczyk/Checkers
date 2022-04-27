@@ -18,5 +18,11 @@
             Target.Figure = From.Figure;
             From.Figure = null;
         }
+
+        public override void UndoMove(Board board)
+        {
+            From.Figure = Target.Figure;
+            Target.Figure = null;
+        }
     }
 }
