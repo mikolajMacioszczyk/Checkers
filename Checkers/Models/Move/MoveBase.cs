@@ -2,6 +2,7 @@
 {
     public abstract class MoveBase
     {
+        public abstract bool IsKillMove { get; }
         public Position From { get; set; }
         public Position Target { get; set; }
 

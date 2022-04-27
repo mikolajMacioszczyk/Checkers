@@ -2,7 +2,10 @@
 {
     public class NormalMove : MoveBase
     {
+
         public NormalMove(Position from, Position target) : base(from, target) {}
+
+        public override bool IsKillMove => false;
 
         public override void MakeMove(Board board)
         {

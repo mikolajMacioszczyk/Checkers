@@ -234,7 +234,110 @@ namespace CheckersTests.MovesTests
         [Fact]
         public void GetMoves_Man_StrikeKill_MuliplePath()
         {
+            // arrange
+            board.Positions[4, 3].Figure = board.Positions[5, 4].Figure;
+            board.Positions[3, 2].Figure = board.Positions[2, 1].Figure;
+            board.Positions[3, 4].Figure = board.Positions[2, 5].Figure;
+            board.Positions[0, 3].Figure = null;
 
+            var startFigure = board.Positions[4, 3].Figure;
+
+            // path 1
+            var path1killFrom1 = board.Positions[4, 3];
+            var path1killedPosition1 = board.Positions[3, 2];
+            var path1killTarget1 = board.Positions[2, 1];
+
+            var path1killFrom2 = board.Positions[2, 1];
+            var path1killedPosition2 = board.Positions[1, 2];
+            var path1killTarget2 = board.Positions[0, 3];
+
+            var path1killFrom3 = board.Positions[0, 3];
+            var path1killedPosition3 = board.Positions[1, 4];
+            var path1killTarget3 = board.Positions[2, 5];
+
+            var path1killFrom4 = board.Positions[2, 5];
+            var path1killedPosition4 = board.Positions[3, 4];
+            var path1killTarget4 = board.Positions[4, 3];
+
+            // path 2
+            var path2killFrom1 = board.Positions[4, 3];
+            var path2killedPosition1 = board.Positions[3, 4];
+            var path2killTarget1 = board.Positions[2, 5];
+
+            var path2killFrom2 = board.Positions[2, 5];
+            var path2killedPosition2 = board.Positions[1, 4];
+            var path2killTarget2 = board.Positions[0, 3];
+
+            var path2killFrom3 = board.Positions[0, 3];
+            var path2killedPosition3 = board.Positions[1, 2];
+            var path2killTarget3 = board.Positions[2, 1];
+
+            var path2killFrom4 = board.Positions[2, 1];
+            var path2killedPosition4 = board.Positions[3, 2];
+            var path2killTarget4 = board.Positions[4, 3];
+
+            var expectedMoves = new List<MoveBase> {
+                new KillMove(path1killFrom1, path1killTarget1, path1killedPosition1){
+                    InnerMove = new KillMove(path1killFrom2, path1killTarget2, path1killedPosition2)
+                    {
+                        InnerMove = new KillMove(path1killFrom3, path1killTarget3, path1killedPosition3)
+                        {
+                            InnerMove = new KillMove(path1killFrom4, path1killTarget4, path1killedPosition4)
+                        }
+                    }
+                },
+                new KillMove(path2killFrom1, path2killTarget1, path2killedPosition1){
+                    InnerMove = new KillMove(path2killFrom2, path2killTarget2, path2killedPosition2)
+                    {
+                        InnerMove = new KillMove(path2killFrom3, path2killTarget3, path2killedPosition3)
+                        {
+                            InnerMove = new KillMove(path2killFrom4, path2killTarget4, path2killedPosition4)
+                        }
+                    }
+                }
+            };
+
+            // act
+            var resultMoves = startFigure.GetAvailableMoves(board);
+
+            // assert
+            Assert.Equal(expectedMoves.Count, resultMoves.Count);
+            Assert.True(resultMoves.All(r => expectedMoves.Any(e => e.GetType() == r.GetType() && e.From == r.From && e.Target == r.Target)));
+            var path1kill1 = (resultMoves[0] as KillMove);
+            Assert.Equal(path1kill1.From, path1killFrom1);
+            Assert.Equal(path1kill1.Target, path1killTarget1);
+            Assert.Equal(path1kill1.Killed, path1killedPosition1);
+            var path1kill2 = path1kill1.InnerMove;
+            Assert.Equal(path1kill2.From, path1killFrom2);
+            Assert.Equal(path1kill2.Target, path1killTarget2);
+            Assert.Equal(path1kill2.Killed, path1killedPosition2);
+            var path1kill3 = path1kill2.InnerMove;
+            Assert.Equal(path1kill3.From, path1killFrom3);
+            Assert.Equal(path1kill3.Target, path1killTarget3);
+            Assert.Equal(path1kill3.Killed, path1killedPosition3);
+            var path1kill4 = path1kill3.InnerMove;
+            Assert.Equal(path1kill4.From, path1killFrom4);
+            Assert.Equal(path1kill4.Target, path1killTarget4);
+            Assert.Equal(path1kill4.Killed, path1killedPosition4);
+            Assert.Null(path1kill4.InnerMove);
+
+            var path2kill1 = (resultMoves[1] as KillMove);
+            Assert.Equal(path2kill1.From, path2killFrom1);
+            Assert.Equal(path2kill1.Target, path2killTarget1);
+            Assert.Equal(path2kill1.Killed, path2killedPosition1);
+            var path2kill2 = path2kill1.InnerMove;
+            Assert.Equal(path2kill2.From, path2killFrom2);
+            Assert.Equal(path2kill2.Target, path2killTarget2);
+            Assert.Equal(path2kill2.Killed, path2killedPosition2);
+            var path2kill3 = path2kill2.InnerMove;
+            Assert.Equal(path2kill3.From, path2killFrom3);
+            Assert.Equal(path2kill3.Target, path2killTarget3);
+            Assert.Equal(path2kill3.Killed, path2killedPosition3);
+            var path2kill4 = path2kill3.InnerMove;
+            Assert.Equal(path2kill4.From, path2killFrom4);
+            Assert.Equal(path2kill4.Target, path2killTarget4);
+            Assert.Equal(path2kill4.Killed, path2killedPosition4);
+            Assert.Null(path2kill4.InnerMove);
         }
     }
 }

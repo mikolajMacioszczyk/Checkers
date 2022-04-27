@@ -106,7 +106,7 @@ namespace Checkers.Models
                     && !strike.Any(s => s.Killed == enemyPosition))
                 {
                     var nextPosition = board.Positions[nextRow, nextColumn];
-                    if (nextPosition != null && nextPosition.Figure == null)
+                    if (nextPosition != null && (nextPosition.Figure == null || nextPosition.Figure == this))
                     {
                         // move is continued
                         isStopped = false;

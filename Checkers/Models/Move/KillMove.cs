@@ -2,6 +2,8 @@
 {
     public class KillMove : NormalMove
     {
+        public override bool IsKillMove => true;
+
         public KillMove(Position from, Position target, Position killed) : base(from, target) { 
             Killed = killed;
         }
