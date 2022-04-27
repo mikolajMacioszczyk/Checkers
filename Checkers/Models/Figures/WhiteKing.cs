@@ -7,5 +7,10 @@ namespace Checkers.Models
         public WhiteKing() : base(FigureColor.White)
         {
         }
+
+        public override Figure Copy()
+        {
+            return new WhiteKing();
+        }
     }
 }

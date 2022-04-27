@@ -13,5 +13,7 @@ namespace Checkers.Models
         }
 
         public abstract List<MoveBase> GetAvailableMoves(Board board);
+
+        public abstract Figure Copy();
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Checkers.Models
 {
+    // moving back improve performance a lot
+    // introduce interfaces
     public class Board
     {
         public Position[,] Positions { get; private set; }
@@ -9,8 +11,6 @@ namespace Checkers.Models
         public int FiguresCount { get; private set; }
         public List<Figure> Killed { get; set; }
         public List<Figure> AliveFigures { get; set; }
-
-        #region Reset
 
         public void Reset(int size, int figuresCount)
         {
@@ -27,6 +27,65 @@ namespace Checkers.Models
 
             // initialize Black
             InitializeFigures(Size - figuresRows, Size, FigureColor.Black);
+        }
+
+        public bool IsPositionEnabled(int row, int col) => (row + col) % 2 == 1;
+
+        public Position FindFigure(Figure figure)
+        {
+            foreach (var position in Positions)
+            {
+                if (position?.Figure == figure)
+                {
+                    return position;
+                }
+            }
+
+            return null;
+        }
+
+        public void MarkKilled(Position position)
+        {
+            Killed.Add(position.Figure);
+            AliveFigures.Remove(position.Figure);
+
+            position.Figure = null;
+        }
+
+        public List<MoveBase> GetAllAvailableMoves(FigureColor forColor)
+        {
+            var moves = new List<MoveBase>();
+            foreach (var figure in AliveFigures.Where(f => f.Color == forColor))
+            {
+                moves.AddRange(figure.GetAvailableMoves(this));
+            }
+
+            if (moves.Any(m => m.IsKillMove))
+            {
+                moves = moves.Where(m => m.IsKillMove).ToList();
+            }
+
+            return moves;
+        }
+
+        public Board DeepCopy()
+        {
+            Board copy = new Board()
+            {
+                Killed = Killed.Select(f => f.Copy()).ToList(),
+                AliveFigures = AliveFigures.Select(f => f.Copy()).ToList(),
+            };
+
+            copy.Reset(Size, FiguresCount);
+            for (int row = 0; row < Size; row++)
+            {
+                for (int column = 0; column < Size; column++)
+                {
+                    copy.Positions[row, column].Figure = Positions[row, column].Figure.Copy();
+                }
+            }
+
+            return copy;
         }
 
         private void InitializePositions()
@@ -59,32 +118,6 @@ namespace Checkers.Models
                     }
                 }
             }
-        }
-
-        #endregion
-        
-        public bool IsPositionEnabled(int row, int col) => (row + col) % 2 == 1;
-
-
-        public Position FindFigure(Figure figure)
-        {
-            foreach (var position in Positions)
-            {
-                if (position?.Figure == figure)
-                {
-                    return position;
-                }
-            }
-
-            return null;
-        }
-
-        public void MarkKilled(Position position)
-        {
-            Killed.Add(position.Figure);
-            AliveFigures.Remove(position.Figure);
-
-            position.Figure = null;
         }
     }
 }

@@ -6,6 +6,11 @@ namespace Checkers.Models
     {
         public BlackMan() : base(FigureColor.Black) { }
 
+        public override Figure Copy()
+        {
+            return new BlackMan();
+        }
+
         protected override void TryAddNormalMoves(Board board, List<MoveBase> moves)
         {
             var nextRow = CurrentPosition.Row - 1;
