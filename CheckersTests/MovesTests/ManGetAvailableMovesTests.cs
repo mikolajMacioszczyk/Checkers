@@ -9,13 +9,13 @@ using Xunit;
 
 namespace CheckersTests.MovesTests
 {
-    public class WhiteManGetAvailableMovesTests
+    public class ManGetAvailableMovesTests
     {
         private Board board;
         private static readonly int Size = 8;
         private static readonly int FiguresCount = 12;
 
-        public WhiteManGetAvailableMovesTests()
+        public ManGetAvailableMovesTests()
         {
             board = new Board();
             board.Reset(Size, FiguresCount);

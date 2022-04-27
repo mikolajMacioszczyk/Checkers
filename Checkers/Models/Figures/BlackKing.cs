@@ -2,15 +2,8 @@
 
 namespace Checkers.Models
 {
-    public class BlackKing : Figure
+    public class BlackKing : King
     {
-        public BlackKing() : base(FigureColor.Black)
-        {
-        }
-
-        public override List<MoveBase> GetAvailableMoves(Board board)
-        {
-            throw new NotImplementedException();
-        }
+        public BlackKing() : base(FigureColor.Black) { }
     }
 }

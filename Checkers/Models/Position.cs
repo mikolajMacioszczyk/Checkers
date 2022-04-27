@@ -30,5 +30,7 @@
                 }
             }
         }
+
+        public bool IsEmpty() => Figure == null;
     }
 }
