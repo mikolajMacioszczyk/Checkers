@@ -53,7 +53,7 @@ namespace Checkers.Models
                 {
                     if (IsPositionEnabled(row, column))
                     {
-                        Figure man = color == FigureColor.White ? new WhiteMan() : new BlackKing();
+                        Figure man = color == FigureColor.White ? new WhiteMan() : new BlackMan();
                         AliveFigures.Add(man);
                         Positions[row, column].Figure = man;
                     }
