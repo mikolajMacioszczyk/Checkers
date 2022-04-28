@@ -24,5 +24,12 @@
             From.Figure = Target.Figure;
             Target.Figure = null;
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is NormalMove move &&
+                   EqualityComparer<Position>.Default.Equals(From, move.From) &&
+                   EqualityComparer<Position>.Default.Equals(Target, move.Target);
+        }
     }
 }

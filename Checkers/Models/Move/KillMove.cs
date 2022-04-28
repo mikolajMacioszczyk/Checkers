@@ -37,5 +37,14 @@
         {
             return new KillMove(From, Target, Killed) { InnerMove = InnerMove?.Copy() };
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is KillMove move &&
+                   base.Equals(obj) &&
+                   EqualityComparer<KillMove>.Default.Equals(InnerMove, move.InnerMove) &&
+                   EqualityComparer<Position>.Default.Equals(Killed, move.Killed) &&
+                   EqualityComparer<Figure>.Default.Equals(KilledFigure, move.KilledFigure);
+        }
     }
 }

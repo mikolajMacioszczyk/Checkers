@@ -26,10 +26,17 @@ namespace Checkers.Managers
 
         private GameResult WhiteMove()
         {
-            Console.WriteLine("White player move: ");
+            Console.WriteLine($"Player {WhitePlayer.Name} (White) move: ");
             ConsoleHelper.ShowBoard(Board);
 
             var move = WhitePlayer.ChooseMove(Board);
+            
+            while (!ValidateCanMove(move, FigureColor.White))
+            {
+                move = WhitePlayer.ChooseMove(Board);
+                Console.WriteLine("Move not permitted. Try again");
+            }
+
             if (move is null)
             {
                 return GameResult.BlackWin;
@@ -42,10 +49,17 @@ namespace Checkers.Managers
 
         private GameResult BlackMove()
         {
-            Console.WriteLine("Black player move: ");
+            Console.WriteLine($"Player {BlackPlayer.Name} (Black) move: ");
             ConsoleHelper.ShowBoard(Board);
 
             var move = BlackPlayer.ChooseMove(Board);
+            
+            while (!ValidateCanMove(move, FigureColor.Black))
+            {
+                move = BlackPlayer.ChooseMove(Board);
+                Console.WriteLine("Move not permitted. Try again");
+            }
+
             if (move is null)
             {
                 return GameResult.WhiteWin;
@@ -54,6 +68,23 @@ namespace Checkers.Managers
             move.MakeMove(Board);
 
             return WhiteMove();
+        }
+
+        private bool ValidateCanMove(MoveBase move, FigureColor color)
+        {
+            if (move is null)
+            {
+                return true;
+            }
+
+            var figure = move.From.Figure;
+            if (figure is null || figure.Color != color)
+            {
+                return false;
+            }
+
+            var availableMoves = figure.GetAvailableMoves(Board);
+            return availableMoves.Contains(move);
         }
     }
 }

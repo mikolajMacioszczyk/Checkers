@@ -26,5 +26,10 @@
         {
             return new KillTransformMove(From, Target, Killed) { InnerMove = InnerMove?.Copy(), Killed = Killed};
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is KillTransformMove move && base.Equals(obj);
+        }
     }
 }

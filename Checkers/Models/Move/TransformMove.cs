@@ -17,5 +17,10 @@
             Target.Figure = oldFigure;
             base.UndoMove(board);
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is TransformMove && base.Equals(obj);
+        }
     }
 }
