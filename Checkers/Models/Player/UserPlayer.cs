@@ -5,16 +5,17 @@ namespace Checkers.Models.Player
     public class UserPlayer : IPlayer
     {
         public string Name { get; set; }
-        public FigureColor MyColor { get; set; }
+
+        public FigureColor Color { get; set; }
 
         public void AssignColor(FigureColor color)
         {
-            MyColor = color;
+            Color = color;
         }
 
         public MoveBase ChooseMove(Board currentState)
         {
-            var available = currentState.GetAllAvailableMoves(MyColor);
+            var available = currentState.GetAllAvailableMoves(Color);
             if (!available.Any())
             {
                 return null;

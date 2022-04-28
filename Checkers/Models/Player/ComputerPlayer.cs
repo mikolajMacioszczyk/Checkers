@@ -7,16 +7,16 @@ namespace Checkers.Models.Player
         private static readonly Random random = new Random();
         public string Name => "Computer";
 
-        public FigureColor MyColor { get; set; }
+        public FigureColor Color { get; set; }
 
         public void AssignColor(FigureColor color)
         {
-            MyColor = color;
+            Color = color;
         }
 
         public MoveBase ChooseMove(Board currentState)
         {
-            var allMoves = currentState.GetAllAvailableMoves(MyColor);
+            var allMoves = currentState.GetAllAvailableMoves(Color);
 
             var choice = allMoves.OrderBy(_ => random.Next()).FirstOrDefault();
 

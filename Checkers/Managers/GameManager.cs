@@ -19,57 +19,60 @@ namespace Checkers.Managers
             whitePlayer.AssignColor(FigureColor.White);
             BlackPlayer = blackPlayer;
             blackPlayer.AssignColor(FigureColor.Black);
+            
+            int counter = 0;
 
             Board = new Board();
             Board.Reset(8, 12);
 
-            var result = WhiteMove();
+            var result = NextMove(WhitePlayer, ref counter, 0);
+            Console.WriteLine("Game over !!!");
+            switch (result)
+            {
+                case GameResult.WhiteWin:
+                    Console.WriteLine($"Player {whitePlayer.Name} (White) won in {counter} moves");
+                    break;
+                case GameResult.BlackWin:
+                    Console.WriteLine($"Player {BlackPlayer.Name} (Black) won in {counter} moves");
+                    break;
+                default:
+                    Console.WriteLine($"Draw after {counter} moves");
+                    break;
+            }
         }
 
-        private GameResult WhiteMove()
+        private GameResult NextMove(IPlayer player, ref int counter, int onlyKingsMove)
         {
             ConsoleHelper.ShowBoard(Board);
-            Console.WriteLine($"Player {WhitePlayer.Name} (White) move: ");
+            var color = player.Color == FigureColor.White ? "White" : "Black";
+            Console.WriteLine($"Player {player.Name} ({color}) move: ");
 
-            var move = WhitePlayer.ChooseMove(Board);
-            
-            while (!ValidateCanMove(move, FigureColor.White))
+            var move = player.ChooseMove(Board);
+
+            while (!ValidateCanMove(move, player.Color))
             {
-                move = WhitePlayer.ChooseMove(Board);
+                move = player.ChooseMove(Board);
                 Console.WriteLine("Move not permitted. Try again");
             }
 
             if (move is null)
             {
-                return GameResult.BlackWin;
+                return player.Color == FigureColor.White ? GameResult.BlackWin : GameResult.WhiteWin;
             }
 
             move.MakeMove(Board);
-
-            return BlackMove();
-        }
-
-        private GameResult BlackMove()
-        {
-            ConsoleHelper.ShowBoard(Board);
-            Console.WriteLine($"Player {BlackPlayer.Name} (Black) move: ");
-
-            var move = BlackPlayer.ChooseMove(Board);
-            
-            while (!ValidateCanMove(move, FigureColor.Black))
+            counter++;
+            if (Board.OnlyKings)
             {
-                move = BlackPlayer.ChooseMove(Board);
-                Console.WriteLine("Move not permitted. Try again");
+                onlyKingsMove++;
+                if (onlyKingsMove >= 15)
+                {
+                    return GameResult.Draw;
+                }
             }
 
-            if (move is null)
-            {
-                return GameResult.WhiteWin;
-            }
-
-            move.MakeMove(Board);
-
-            return WhiteMove();
+            var nextPlayer = player.Color == FigureColor.White ? BlackPlayer : WhitePlayer;
+            return NextMove(nextPlayer, ref counter, onlyKingsMove);
         }
 
         private bool ValidateCanMove(MoveBase move, FigureColor color)

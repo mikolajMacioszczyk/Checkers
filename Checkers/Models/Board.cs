@@ -101,6 +101,8 @@ namespace Checkers.Models
             return moves;
         }
 
+        public bool OnlyKings => AliveFigures.All(f => f is King);
+
         public Board DeepCopy()
         {
             Board copy = new Board()
