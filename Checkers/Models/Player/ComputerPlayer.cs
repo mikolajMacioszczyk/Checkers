@@ -4,16 +4,23 @@ namespace Checkers.Models.Player
 {
     public class ComputerPlayer : IPlayer
     {
+        private static readonly Random random = new Random();
         public string Name => throw new NotImplementedException();
+
+        public FigureColor MyColor { get; set; }
 
         public void AssignColor(FigureColor color)
         {
-            throw new NotImplementedException();
+            MyColor = color;
         }
 
         public MoveBase ChooseMove(Board currentState)
         {
-            throw new NotImplementedException();
+            var allMoves = currentState.GetAllAvailableMoves(MyColor);
+
+            var choice = allMoves.OrderBy(_ => random.Next()).FirstOrDefault();
+
+            return choice;
         }
     }
 }

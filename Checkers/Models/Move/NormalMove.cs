@@ -9,20 +9,14 @@
 
         public override void MakeMove(Board board)
         {
-            // TODO: Only Debug
-            if (From.Figure == null)
-            {
-                throw new ArgumentException(nameof(From.Figure));
-            }
-
-            Target.Figure = From.Figure;
-            From.Figure = null;
+            board.Positions[Target.Row, Target.Column].Figure = board.Positions[From.Row, From.Column].Figure;
+            board.Positions[From.Row, From.Column].Figure = null;
         }
 
         public override void UndoMove(Board board)
         {
-            From.Figure = Target.Figure;
-            Target.Figure = null;
+            board.Positions[From.Row, From.Column].Figure = board.Positions[Target.Row, Target.Column].Figure;
+            board.Positions[Target.Row, Target.Column].Figure = null;
         }
 
         public override bool Equals(object? obj)

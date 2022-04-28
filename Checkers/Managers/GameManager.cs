@@ -29,11 +29,11 @@ namespace Checkers.Managers
             Console.WriteLine($"Player {WhitePlayer.Name} (White) move: ");
             ConsoleHelper.ShowBoard(Board);
 
-            var move = WhitePlayer.ChooseMove(Board);
+            var move = WhitePlayer.ChooseMove(Board.DeepCopy());
             
             while (!ValidateCanMove(move, FigureColor.White))
             {
-                move = WhitePlayer.ChooseMove(Board);
+                move = WhitePlayer.ChooseMove(Board.DeepCopy());
                 Console.WriteLine("Move not permitted. Try again");
             }
 
@@ -52,11 +52,11 @@ namespace Checkers.Managers
             Console.WriteLine($"Player {BlackPlayer.Name} (Black) move: ");
             ConsoleHelper.ShowBoard(Board);
 
-            var move = BlackPlayer.ChooseMove(Board);
+            var move = BlackPlayer.ChooseMove(Board.DeepCopy());
             
             while (!ValidateCanMove(move, FigureColor.Black))
             {
-                move = BlackPlayer.ChooseMove(Board);
+                move = BlackPlayer.ChooseMove(Board.DeepCopy());
                 Console.WriteLine("Move not permitted. Try again");
             }
 

@@ -8,16 +8,16 @@
         {
             base.MakeMove(board);
 
-            Figure newFigure = Target.Figure.Color == Enums.FigureColor.White ? new WhiteKing() : new BlackKing();
+            Figure newFigure = board.Positions[Target.Row, Target.Column].Figure.Color == Enums.FigureColor.White ? new WhiteKing() : new BlackKing();
 
-            Target.Figure = newFigure;
+            board.Positions[Target.Row, Target.Column].Figure = newFigure;
         }
 
         public override void UndoMove(Board board)
         {
-            Figure oldFigure = Target.Figure.Color == Enums.FigureColor.White ? new WhiteMan() : new BlackMan();
+            Figure oldFigure = board.Positions[Target.Row, Target.Column].Figure.Color == Enums.FigureColor.White ? new WhiteMan() : new BlackMan();
 
-            Target.Figure = oldFigure;
+            board.Positions[Target.Row, Target.Column].Figure = oldFigure;
 
             base.UndoMove(board);
         }

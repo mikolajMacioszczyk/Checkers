@@ -17,8 +17,8 @@
         {
             base.MakeMove(board);
 
-            KilledFigure = Killed.Figure;
-            board.MarkKilled(Killed);
+            KilledFigure = board.Positions[Killed.Row, Killed.Column].Figure;
+            board.MarkKilled(board.Positions[Killed.Row, Killed.Column]);
             
             InnerMove?.MakeMove(board);
         }
@@ -27,7 +27,7 @@
         {
             InnerMove?.UndoMove(board);
 
-            board.RestoreKilled(KilledFigure, Killed);
+            board.RestoreKilled(KilledFigure, board.Positions[Killed.Row, Killed.Column]);
             KilledFigure = null;
             
             base.UndoMove(board);
