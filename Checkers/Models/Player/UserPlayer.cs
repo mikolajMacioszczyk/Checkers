@@ -24,7 +24,7 @@ namespace Checkers.Models.Player
 
             for (int i = 0; i < available.Count; i++)
             {
-                Console.WriteLine($"{i + 1} {available[i]}");
+                Console.WriteLine($"{i + 1} {available[i].Print(currentState)}");
             }
 
             MoveBase move = null;

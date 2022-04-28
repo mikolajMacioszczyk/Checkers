@@ -6,8 +6,11 @@ namespace Checkers.Managers
     {
         public static void ShowBoard(Board board)
         {
+            Console.WriteLine("  | " + string.Join(" | ", Enumerable.Range(0, board.Size).Reverse()) + " |");
+            Console.WriteLine(new string('-', board.Size * 4 + 5));
             for (int row = board.Size - 1; row >= 0; row--)
             {
+                Console.Write($"{row} |");
                 for (int column = 0; column < board.Size; column++)
                 {
                     if (board.IsPositionEnabled(row, column))
@@ -30,9 +33,11 @@ namespace Checkers.Managers
                     }
                     Console.Write("|");
                 }
-                Console.WriteLine();
-                Console.WriteLine(new string('-', board.Size * 4));
+                Console.WriteLine($" {row}");
+                Console.WriteLine(new string('-', board.Size * 4 + 5));
             }
+            Console.WriteLine("  | " + string.Join(" | ", Enumerable.Range(0, board.Size).Reverse()) + " |");
+            Console.WriteLine();
         }
     }
 }

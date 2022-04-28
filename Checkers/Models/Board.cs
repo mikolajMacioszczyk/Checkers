@@ -92,17 +92,23 @@ namespace Checkers.Models
             Board copy = new Board()
             {
                 Killed = Killed.Select(f => f.Copy()).ToList(),
-                AliveFigures = AliveFigures.Select(f => f.Copy()).ToList(),
+                AliveFigures = new List<Figure>(),
             };
 
-            copy.Reset(Size, FiguresCount);
+            copy.Positions = new Position[Size, Size];
             for (int row = 0; row < Size; row++)
             {
                 for (int column = 0; column < Size; column++)
                 {
                     if (IsPositionEnabled(row, column))
                     {
-                        copy.Positions[row, column].Figure = Positions[row, column].Figure.Copy();
+                        copy.Positions[row, column] = new Position() { Row = row, Column = column };
+                        var figure = Positions[row, column].Figure?.Copy();
+                        if (figure != null)
+                        {
+                            copy.Positions[row, column].Figure = figure;
+                            copy.AliveFigures.Add(figure);
+                        }
                     }
                 }
             }

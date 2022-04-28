@@ -8,7 +8,7 @@ namespace Checkers.Models
 
         public override Figure Copy()
         {
-            return new BlackKing();
+            return new BlackKing() { CurrentPosition = CurrentPosition};
         }
     }
 }

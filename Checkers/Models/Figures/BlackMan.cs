@@ -8,7 +8,7 @@ namespace Checkers.Models
 
         public override Figure Copy()
         {
-            return new BlackMan();
+            return new BlackMan() { CurrentPosition = CurrentPosition};
         }
 
         protected override void TryAddNormalMoves(Board board, List<MoveBase> moves)
