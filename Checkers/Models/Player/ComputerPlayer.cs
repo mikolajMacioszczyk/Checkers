@@ -5,7 +5,7 @@ namespace Checkers.Models.Player
     public class ComputerPlayer : IPlayer
     {
         private static readonly Random random = new Random();
-        public string Name => throw new NotImplementedException();
+        public string Name => "Computer";
 
         public FigureColor MyColor { get; set; }
 

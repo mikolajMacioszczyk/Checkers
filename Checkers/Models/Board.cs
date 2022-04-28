@@ -100,7 +100,10 @@ namespace Checkers.Models
             {
                 for (int column = 0; column < Size; column++)
                 {
-                    copy.Positions[row, column].Figure = Positions[row, column].Figure.Copy();
+                    if (IsPositionEnabled(row, column))
+                    {
+                        copy.Positions[row, column].Figure = Positions[row, column].Figure.Copy();
+                    }
                 }
             }
 

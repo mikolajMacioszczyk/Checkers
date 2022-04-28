@@ -4,7 +4,7 @@ namespace Checkers.Models.Player
 {
     public class UserPlayer : IPlayer
     {
-        public string Name => throw new NotImplementedException();
+        public string Name { get; set; }
         public FigureColor MyColor { get; set; }
 
         public void AssignColor(FigureColor color)
