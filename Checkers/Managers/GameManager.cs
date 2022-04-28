@@ -16,7 +16,9 @@ namespace Checkers.Managers
         public void StartGame(IPlayer whitePlayer, IPlayer blackPlayer)
         {
             WhitePlayer = whitePlayer;
+            whitePlayer.AssignColor(FigureColor.White);
             BlackPlayer = blackPlayer;
+            blackPlayer.AssignColor(FigureColor.Black);
 
             Board = new Board();
             Board.Reset(8, 12);
@@ -26,14 +28,14 @@ namespace Checkers.Managers
 
         private GameResult WhiteMove()
         {
-            Console.WriteLine($"Player {WhitePlayer.Name} (White) move: ");
             ConsoleHelper.ShowBoard(Board);
+            Console.WriteLine($"Player {WhitePlayer.Name} (White) move: ");
 
-            var move = WhitePlayer.ChooseMove(Board.DeepCopy());
+            var move = WhitePlayer.ChooseMove(Board);
             
             while (!ValidateCanMove(move, FigureColor.White))
             {
-                move = WhitePlayer.ChooseMove(Board.DeepCopy());
+                move = WhitePlayer.ChooseMove(Board);
                 Console.WriteLine("Move not permitted. Try again");
             }
 
@@ -49,14 +51,14 @@ namespace Checkers.Managers
 
         private GameResult BlackMove()
         {
-            Console.WriteLine($"Player {BlackPlayer.Name} (Black) move: ");
             ConsoleHelper.ShowBoard(Board);
+            Console.WriteLine($"Player {BlackPlayer.Name} (Black) move: ");
 
-            var move = BlackPlayer.ChooseMove(Board.DeepCopy());
+            var move = BlackPlayer.ChooseMove(Board);
             
             while (!ValidateCanMove(move, FigureColor.Black))
             {
-                move = BlackPlayer.ChooseMove(Board.DeepCopy());
+                move = BlackPlayer.ChooseMove(Board);
                 Console.WriteLine("Move not permitted. Try again");
             }
 
@@ -84,7 +86,7 @@ namespace Checkers.Managers
             }
 
             var availableMoves = figure.GetAvailableMoves(Board);
-            return availableMoves.Contains(move);
+            return availableMoves.Any(m => m.Equals(move));
         }
     }
 }

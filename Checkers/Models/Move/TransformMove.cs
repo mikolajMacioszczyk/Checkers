@@ -3,18 +3,23 @@
     public class TransformMove : NormalMove
     {
         public TransformMove(Position from, Position target) : base(from, target) { }
+        public Figure OldFigure { get; set; }
 
         public override void MakeMove(Board board)
         {
             base.MakeMove(board);
+            OldFigure = Target.Figure;
             Figure newFigure = Target.Figure.Color == Enums.FigureColor.White ? new WhiteKing() : new BlackKing();
             board.Positions[Target.Row, Target.Column].Figure = newFigure;
+            board.Replace(OldFigure, newFigure);
         }
 
         public override void UndoMove(Board board)
         {
-            Figure oldFigure = board.Positions[Target.Row, Target.Column].Figure.Color == Enums.FigureColor.White ? new WhiteMan() : new BlackMan();
-            board.Positions[Target.Row, Target.Column].Figure = oldFigure;
+            var removed = board.Positions[Target.Row, Target.Column].Figure;
+            board.Positions[Target.Row, Target.Column].Figure = OldFigure;
+            board.Replace(removed, OldFigure);
+            OldFigure = null;
             base.UndoMove(board);
         }
 

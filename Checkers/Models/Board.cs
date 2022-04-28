@@ -71,6 +71,20 @@ namespace Checkers.Models
             Positions[position.Row, position.Column].Figure = figure;
         }
 
+        public void Replace(Figure toRemove, Figure toAdd)
+        {
+            if (AliveFigures.Contains(toRemove))
+            {
+                AliveFigures.Remove(toRemove);
+                AliveFigures.Add(toAdd);
+            }
+            else if (Killed.Contains(toRemove))
+            {
+                Killed.Remove(toRemove);
+                Killed.Add(toAdd);
+            }
+        }
+
         public List<MoveBase> GetAllAvailableMoves(FigureColor forColor)
         {
             var moves = new List<MoveBase>();
@@ -93,6 +107,8 @@ namespace Checkers.Models
             {
                 Killed = Killed.Select(f => f.Copy()).ToList(),
                 AliveFigures = new List<Figure>(),
+                Size = Size,
+                FiguresCount = FiguresCount
             };
 
             copy.Positions = new Position[Size, Size];

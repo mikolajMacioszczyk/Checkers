@@ -37,5 +37,12 @@
         {
             return $"[{Row}, {Column}]";
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Position position &&
+                   Row == position.Row &&
+                   Column == position.Column;
+        }
     }
 }
