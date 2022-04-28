@@ -19,6 +19,11 @@ namespace Checkers.Models
             return moves;
         }
 
+        public override string ToString()
+        {
+            return "King";
+        }
+
         #region Normal move
 
         private void TryAddNormalMoves(Board board, List<MoveBase> moves)

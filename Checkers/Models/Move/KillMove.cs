@@ -11,7 +11,7 @@
         public KillMove InnerMove { get; set; }
         public Position Killed { get; set; }
 
-        private Figure KilledFigure;
+        protected Figure KilledFigure;
 
         public override void MakeMove(Board board)
         {
@@ -45,6 +45,16 @@
                    EqualityComparer<KillMove>.Default.Equals(InnerMove, move.InnerMove) &&
                    EqualityComparer<Position>.Default.Equals(Killed, move.Killed) &&
                    EqualityComparer<Figure>.Default.Equals(KilledFigure, move.KilledFigure);
+        }
+
+        public override string Print(Board board)
+        {
+            var baseMoveString = $"Kill {KilledFigure} at {Killed} by moving {board.Positions[From.Row, From.Column].Figure} from {From} to {Target}";
+            if (InnerMove != null)
+            {
+                baseMoveString += ", next " + InnerMove.Print(board);
+            }
+            return baseMoveString;
         }
     }
 }

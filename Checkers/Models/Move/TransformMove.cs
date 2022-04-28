@@ -22,5 +22,10 @@
         {
             return obj is TransformMove && base.Equals(obj);
         }
+
+        public override string Print(Board board)
+        {
+            return $"Move {board.Positions[From.Row, From.Column].Figure} from {From} to {Target}, tranforming to King";
+        }
     }
 }

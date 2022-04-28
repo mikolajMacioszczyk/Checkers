@@ -8,6 +8,11 @@ namespace Checkers.Models
         {
         }
 
+        public override string ToString()
+        {
+            return "Man";
+        }
+
         public override List<MoveBase> GetAvailableMoves(Board board)
         {
             var moves = new List<MoveBase>();

@@ -32,5 +32,10 @@
         }
 
         public bool IsEmpty() => Figure == null;
+
+        public override string ToString()
+        {
+            return $"[{Row}, {Column}]";
+        }
     }
 }

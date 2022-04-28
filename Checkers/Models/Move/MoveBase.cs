@@ -15,5 +15,7 @@
         public abstract void MakeMove(Board board);
 
         public abstract void UndoMove(Board board);
+
+        public abstract string Print(Board board);
     }
 }

@@ -31,5 +31,10 @@
         {
             return obj is KillTransformMove move && base.Equals(obj);
         }
+
+        public override string Print(Board board)
+        {
+            return $"Kill {KilledFigure} at {Killed} by moving {board.Positions[From.Row, From.Column].Figure} from {From} to {Target}, and transforming to King";
+        }
     }
 }
