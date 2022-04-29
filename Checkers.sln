@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckersTests", "CheckersTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleCheckers", "ConsoleCheckers\ConsoleCheckers.csproj", "{4F9957B6-A4E0-42F0-9357-5E92F8F2F2C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopCheckers", "DesktopCheckers\DesktopCheckers.csproj", "{1C56EC31-1EC7-44DE-A785-82870FCD20E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4F9957B6-A4E0-42F0-9357-5E92F8F2F2C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F9957B6-A4E0-42F0-9357-5E92F8F2F2C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F9957B6-A4E0-42F0-9357-5E92F8F2F2C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C56EC31-1EC7-44DE-A785-82870FCD20E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C56EC31-1EC7-44DE-A785-82870FCD20E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C56EC31-1EC7-44DE-A785-82870FCD20E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C56EC31-1EC7-44DE-A785-82870FCD20E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
