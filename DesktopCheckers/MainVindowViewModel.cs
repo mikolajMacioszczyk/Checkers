@@ -5,19 +5,27 @@ using Checkers.Models;
 using Checkers.Models.Player;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace DesktopCheckers
 {
     public class MainVindowViewModel : IUserInterface, INotifyPropertyChanged
     {
+        private static readonly Brush GrayBrush = new SolidColorBrush(Colors.Gray);
+        private static readonly Brush RedBrush = new SolidColorBrush(Colors.IndianRed);
         private const int Size = 8;
+
+        private string message;
+        private bool isPlayerMoving;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -25,7 +33,7 @@ namespace DesktopCheckers
 
         public DesktopPlayer DesktopPlayer { get; set; } = new DesktopPlayer();
 
-        private string message;
+        public List<MoveBase> AvailableMoves { get; set; } = new List<MoveBase>();
 
         public string Message
         {
@@ -43,7 +51,7 @@ namespace DesktopCheckers
             {
                 for (int column = 0; column < Size; column++)
                 {
-                    BoardFields[row * 8 + column] = new BoardField();
+                    BoardFields[row * 8 + column] = new BoardField() { FiledColor = GrayBrush };
                 }
             }
         }
@@ -53,11 +61,41 @@ namespace DesktopCheckers
             var gameManager = new GameManager(this);
             var whitePlayer = DesktopPlayer;
             whitePlayer.Name = "Mikołaj";
+            whitePlayer.ChooseStarted += (allMoves) =>
+            {
+                AvailableMoves.Clear();
+                foreach (var move in allMoves)
+                {
+                    AvailableMoves.Add(move);
+                }
+                isPlayerMoving = true;
+            };
+
             var blackPlayer = new ComputerPlayer();
             await Task.Run(() =>
             {
                 gameManager.StartGame(whitePlayer, blackPlayer);
             });
+        }
+
+        public void OnFieldClicked(int row, int column)
+        {
+            foreach (var field in BoardFields)
+            {
+                field.FiledColor = GrayBrush;
+            }
+
+            if (isPlayerMoving)
+            {
+                var figureMoves = AvailableMoves.Where(m => m.From.Row == row && m.From.Column == column).ToList();
+                foreach (var figureMove in figureMoves)
+                {
+                    int targetRow = figureMove.Target.Row;
+                    int targetColumn = figureMove.Target.Column;
+                    
+                    BoardFields[targetRow * Size + targetColumn].FiledColor = RedBrush;
+                }
+            }
         }
 
         public void ShowNextMove(IPlayer player)

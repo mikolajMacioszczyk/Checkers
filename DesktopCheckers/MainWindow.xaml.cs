@@ -28,7 +28,17 @@ namespace DesktopCheckers
 
         private void StackPanel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("Haha");
+            if (sender is StackPanel panel) 
+            {
+                if (panel.DataContext is BoardField field)
+                {
+                    var position = field.Position;
+                    if (position != null)
+                    {
+                        (DataContext as MainVindowViewModel)?.OnFieldClicked(position.Row, position.Column);
+                    }
+                }
+            }
         }
 
         private async void Start_Click(object sender, RoutedEventArgs e)

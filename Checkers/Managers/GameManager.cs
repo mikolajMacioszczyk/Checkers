@@ -54,7 +54,7 @@ namespace Checkers.Managers
                 return player.Color == FigureColor.White ? GameResult.BlackWin : GameResult.WhiteWin;
             }
 
-            Thread.Sleep(1800);
+            Thread.Sleep(3000);
 
             move.MakeMove(Board);
             counter++;
