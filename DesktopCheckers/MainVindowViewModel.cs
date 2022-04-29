@@ -1,12 +1,17 @@
 ﻿using Checkers.Enums;
 using Checkers.Interfaces;
+using Checkers.Managers;
 using Checkers.Models;
+using Checkers.Models.Player;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace DesktopCheckers
 {
@@ -16,29 +21,43 @@ namespace DesktopCheckers
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public BoardField[,] BoardFields { get; set; }
+        public BoardField[] BoardFields { get; set; }
+
+        public DesktopPlayer DesktopPlayer { get; set; } = new DesktopPlayer();
 
         private string message;
 
         public string Message
         {
             get { return message; }
-            set { 
-                message = value; 
+            set {
+                message = value;
                 OnPropertyChanged(nameof(Message));
             }
         }
 
         public MainVindowViewModel()
         {
-            BoardFields = new BoardField[Size, Size];
+            BoardFields = new BoardField[Size * Size];
             for (int row = 0; row < Size; row++)
             {
                 for (int column = 0; column < Size; column++)
                 {
-                    BoardFields[row, column] = new BoardField();
+                    BoardFields[row * 8 + column] = new BoardField();
                 }
             }
+        }
+
+        public async Task StartGame()
+        {
+            var gameManager = new GameManager(this);
+            var whitePlayer = DesktopPlayer;
+            whitePlayer.Name = "Mikołaj";
+            var blackPlayer = new ComputerPlayer();
+            await Task.Run(() =>
+            {
+                gameManager.StartGame(whitePlayer, blackPlayer);
+            });
         }
 
         public void ShowNextMove(IPlayer player)
@@ -76,7 +95,7 @@ namespace DesktopCheckers
                 {
                     if (board.IsPositionEnabled(row, column))
                     {
-                        BoardFields[row, column].Position = board.Positions[row, column];
+                        BoardFields[row * 8 + column].Position = board.Positions[row, column];
                     }
                 }
             }

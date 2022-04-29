@@ -30,5 +30,10 @@ namespace DesktopCheckers
         {
             MessageBox.Show("Haha");
         }
+
+        private async void Start_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as MainVindowViewModel)?.StartGame();
+        }
     }
 }

@@ -1,11 +1,6 @@
 ﻿using Checkers.Models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Shapes;
+using System.Windows;
 
 namespace DesktopCheckers
 {
@@ -23,8 +18,8 @@ namespace DesktopCheckers
             }
         }
 
-        public bool IsWhiteMan => Position.Figure is WhiteMan;
-        public bool IsBlackMan => Position.Figure is BlackMan;
+        public Visibility IsWhiteMan => Position?.Figure is WhiteMan ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility IsBlackMan => Position?.Figure is BlackMan ? Visibility.Visible : Visibility.Collapsed;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
