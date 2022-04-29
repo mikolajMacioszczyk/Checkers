@@ -10,7 +10,7 @@
         MinWidth="900" Width="900" MaxWidth="900">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top">
-            <TextBlock Text="Messages!" />
+            <TextBlock Text="{Binding Message}" />
         </StackPanel>
         
         <Grid>
