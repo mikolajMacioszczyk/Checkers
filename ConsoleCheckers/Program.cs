@@ -1,10 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
-using Checkers.Managers;
-using Checkers.Models;
+﻿using Checkers.Managers;
 using Checkers.Models.Player;
+using ConsoleCheckers;
 
-var manager = new GameManager();
-var player1 = new UserPlayer();
+var consoleUserInterface = new ConsoleUserInterface();
+var manager = new GameManager(consoleUserInterface);
+var player1 = new ConsolePlayer();
 player1.Name = "Mikoo";
 var player2 = new ComputerPlayer();
 

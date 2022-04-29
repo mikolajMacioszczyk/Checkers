@@ -1,4 +1,5 @@
-﻿using Checkers.Models;
+﻿using Checkers.Interfaces;
+using Checkers.Models;
 
 namespace Checkers.Eveluation
 {

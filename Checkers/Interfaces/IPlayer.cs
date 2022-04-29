@@ -1,6 +1,7 @@
 ﻿using Checkers.Enums;
+using Checkers.Models;
 
-namespace Checkers.Models.Player
+namespace Checkers.Interfaces
 {
     public interface IPlayer
     {

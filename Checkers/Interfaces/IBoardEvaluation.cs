@@ -1,6 +1,6 @@
 ﻿using Checkers.Models;
 
-namespace Checkers.Eveluation
+namespace Checkers.Interfaces
 {
     public interface IBoardEvaluation
     {

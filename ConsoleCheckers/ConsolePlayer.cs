@@ -1,8 +1,10 @@
 ﻿using Checkers.Enums;
+using Checkers.Interfaces;
+using Checkers.Models;
 
-namespace Checkers.Models.Player
+namespace ConsoleCheckers
 {
-    public class UserPlayer : IPlayer
+    public class ConsolePlayer : IPlayer
     {
         public string Name { get; set; }
 
@@ -20,7 +22,7 @@ namespace Checkers.Models.Player
             {
                 return null;
             }
-            
+
             Console.WriteLine("Available moves: ");
 
             for (int i = 0; i < available.Count; i++)

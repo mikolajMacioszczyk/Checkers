@@ -1,4 +1,5 @@
 ﻿using Checkers.Enums;
+using Checkers.Interfaces;
 
 namespace Checkers.Models.Player
 {
