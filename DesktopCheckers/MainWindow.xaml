@@ -38,133 +38,325 @@
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Row="0" Grid.Column="2" Background="Gray" MouseLeftButtonUp="StackPanel_MouseLeftButtonUp" >
-                <Ellipse Visibility="{Binding BoardFields[56].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[56].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="0" Grid.Column="1" Background="Gray" MouseLeftButtonUp="StackPanel_MouseLeftButtonUp" >
+                <Grid Visibility="{Binding BoardFields[56].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[56].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[56].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[56].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid >
             </StackPanel>
-            <StackPanel Grid.Row="0" Grid.Column="4" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[58].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[58].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="0" Grid.Column="3" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[58].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[58].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[58].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[58].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="0" Grid.Column="6" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[60].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[60].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="0" Grid.Column="5" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[60].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[60].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[60].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[60].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="0" Grid.Column="8" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[62].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[62].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="0" Grid.Column="7" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[62].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[62].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[62].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[62].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="1" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[49].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[49].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="1" Grid.Column="2" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[49].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[49].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[49].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[49].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="3" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[51].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[51].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="1" Grid.Column="4" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[51].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[51].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[51].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[51].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="5" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[53].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[53].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="1" Grid.Column="6" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[53].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[53].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[53].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[53].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="7" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[55].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[55].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="1" Grid.Column="8" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[55].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[55].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[55].IsBlack}">
+                    <Ellipse  Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[55].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="2" Grid.Column="2" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[40].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[40].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="2" Grid.Column="1" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[40].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[40].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[40].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[40].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="2" Grid.Column="4" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[42].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[42].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="2" Grid.Column="3" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[42].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[42].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[42].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[42].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="2" Grid.Column="6" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[44].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[44].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="2" Grid.Column="5" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[44].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[44].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[44].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[44].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="2" Grid.Column="8" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[46].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[46].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="2" Grid.Column="7" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[46].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[46].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[46].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[46].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="3" Grid.Column="1" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[33].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[33].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="3" Grid.Column="2" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[33].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[33].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[33].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[33].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="3" Grid.Column="3" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[35].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[35].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="3" Grid.Column="4" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[35].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[35].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[35].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[35].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="3" Grid.Column="5" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[37].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[37].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="3" Grid.Column="6" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[37].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[37].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[37].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[37].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="3" Grid.Column="7" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[39].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[39].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="3" Grid.Column="8" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[39].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[39].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[39].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[39].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="4" Grid.Column="2" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[24].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[24].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="4" Grid.Column="1" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[24].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[24].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[24].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[24].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="4" Grid.Column="4" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[26].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[26].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="4" Grid.Column="3" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[26].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[26].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[26].IsBlack}">
+                    <Ellipse  Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[26].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="4" Grid.Column="6" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[28].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[28].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="4" Grid.Column="5" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[28].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[28].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[28].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[28].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="4" Grid.Column="8" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[30].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[30].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="4" Grid.Column="7" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[30].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[30].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[30].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[30].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="5" Grid.Column="1" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[17].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[17].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="5" Grid.Column="2" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[17].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[17].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[17].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[17].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="5" Grid.Column="3" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[19].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[19].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="5" Grid.Column="4" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[19].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[19].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[19].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[19].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="5" Grid.Column="5" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[21].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[21].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="5" Grid.Column="6" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[21].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[21].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[21].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[21].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="5" Grid.Column="7" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[23].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[23].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="5" Grid.Column="8" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[23].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[23].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[23].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[23].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="6" Grid.Column="2" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[8].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[8].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="6" Grid.Column="1" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[8].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[8].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[8].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[8].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="6" Grid.Column="4" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[10].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[10].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="6" Grid.Column="3" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[10].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[10].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[10].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[10].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="6" Grid.Column="6" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[12].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[12].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="6" Grid.Column="5" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[12].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[12].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[12].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[12].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="6" Grid.Column="8" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[14].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[14].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="6" Grid.Column="7" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[14].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[14].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[14].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[14].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="7" Grid.Column="1" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[1].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[1].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="7" Grid.Column="2" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[1].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[1].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[1].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[1].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="7" Grid.Column="3" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[3].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[3].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="7" Grid.Column="4" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[3].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[3].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[3].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[3].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="7" Grid.Column="5" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[5].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[5].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="7" Grid.Column="6" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[5].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[5].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[5].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[5].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="7" Grid.Column="7" Background="Gray" >
-                <Ellipse Visibility="{Binding BoardFields[7].IsWhiteMan}" Width="80" Height="80" Fill="White" Margin="10" />
-                <Ellipse Visibility="{Binding BoardFields[7].IsBlackMan}" Width="80" Height="80" Fill="Black" Margin="10" />
+            <StackPanel Grid.Row="7" Grid.Column="8" Background="Gray" >
+                <Grid Visibility="{Binding BoardFields[7].IsWhite}">
+                    <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[7].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                </Grid>
+                <Grid Visibility="{Binding BoardFields[7].IsBlack}">
+                    <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding BoardFields[7].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                </Grid>
             </StackPanel>
         </Grid>
     </DockPanel>

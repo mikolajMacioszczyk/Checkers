@@ -13,13 +13,15 @@ namespace DesktopCheckers
             set 
             { 
                 position = value;
-                OnPropertyChanged(nameof(IsWhiteMan));
-                OnPropertyChanged(nameof(IsBlackMan));
+                OnPropertyChanged(nameof(IsWhite));
+                OnPropertyChanged(nameof(IsBlack));
+                OnPropertyChanged(nameof(IsKing));
             }
         }
 
-        public Visibility IsWhiteMan => Position?.Figure is WhiteMan ? Visibility.Visible : Visibility.Collapsed;
-        public Visibility IsBlackMan => Position?.Figure is BlackMan ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility IsWhite => Position?.Figure is WhiteMan || Position?.Figure is WhiteKing ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility IsBlack => Position?.Figure is BlackMan || Position?.Figure is BlackKing ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility IsKing => Position?.Figure is WhiteKing || Position?.Figure is BlackKing ? Visibility.Visible : Visibility.Collapsed;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
