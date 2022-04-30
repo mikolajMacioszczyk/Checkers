@@ -4,6 +4,6 @@ namespace Checkers.Interfaces
 {
     public interface IBoardEvaluation
     {
-        int Evalueate(Board board);
+        int Evaluate(Board board);
     }
 }

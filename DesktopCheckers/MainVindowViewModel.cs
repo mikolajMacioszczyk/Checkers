@@ -1,4 +1,5 @@
 ﻿using Checkers.Enums;
+using Checkers.Eveluation;
 using Checkers.Interfaces;
 using Checkers.Managers;
 using Checkers.Models;
@@ -76,7 +77,7 @@ namespace DesktopCheckers
                 isPlayerMoving = true;
             };
 
-            var blackPlayer = new ComputerPlayer();
+            var blackPlayer = new ComputerPlayer(new TestEvaluation(), 2);
             await Task.Run(() =>
             {
                 gameManager.StartGame(whitePlayer, blackPlayer);
@@ -112,7 +113,10 @@ namespace DesktopCheckers
             }
             else
             {
-
+                // TODO: Serve multiple possible moves
+                fromField = null;
+                isPlayerMoving = false;
+                DesktopPlayer.SetMoveChoice(selectedMoves.FirstOrDefault());
             }
 
             CleanBrushes();

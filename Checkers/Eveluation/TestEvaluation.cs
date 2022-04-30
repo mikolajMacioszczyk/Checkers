@@ -5,7 +5,7 @@ namespace Checkers.Eveluation
 {
     public class TestEvaluation : IBoardEvaluation
     {
-        public int Evalueate(Board board)
+        public int Evaluate(Board board)
         {
             int sum = 0;
 
