@@ -38,7 +38,7 @@ namespace Checkers.Models.Player
             {
                 testedMove.MakeMove(currentState);
                 int result = Color == FigureColor.White ? 
-                    Max(currentState, 1) : Min(currentState, 1);
+                    Min(currentState, 1) : Max(currentState, 1);
                 moveResults.Add((result, testedMove));
                 testedMove.UndoMove(currentState);
             }
