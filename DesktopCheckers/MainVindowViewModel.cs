@@ -29,7 +29,7 @@ namespace DesktopCheckers
         private static readonly IBoardEvaluation _evaluation = new SimplePositionBasedEvaluation();
 
         private const int Size = 8;
-        private const int Level = 7;
+        private const int Level = 9;
 
         private string message;
         private bool isPlayerMoving;
@@ -79,7 +79,7 @@ namespace DesktopCheckers
                 isPlayerMoving = true;
             };
 
-            var blackPlayer = new ComputerPlayer(_evaluation, Level);
+            var blackPlayer = new ComputerPlayerWithAlphaBeta(_evaluation, Level);
             await Task.Run(() =>
             {
                 gameManager.StartGame(whitePlayer, blackPlayer);
