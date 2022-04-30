@@ -83,72 +83,98 @@ namespace DesktopCheckers
             });
         }
 
+        #region Field Click
+
         public void OnFieldClicked(int row, int column, BoardField clickedField)
         {
             if (clickedField.FiledColor == TargetBrush)
             {
-                var selectedMoves = AvailableMoves.Where(m => 
+                HandleTargetClicked(row, column);
+            }
+            else
+            {
+                HandleFromClicked(row, column, clickedField);
+            }
+        }
+
+        private void HandleTargetClicked(int row, int column)
+        {
+            var selectedMoves = AvailableMoves.Where(m =>
                     m.From.Row == fromField.Position.Row && m.From.Column == fromField.Position.Column
                     && m.Target.Row == row && m.Target.Column == column)
                     .ToList();
 
-                if (selectedMoves.Count == 1)
-                {
-                    fromField = null;
-                    isPlayerMoving = false;
-                    DesktopPlayer.SetMoveChoice(selectedMoves[0]);
-                }
-                else
-                {
-
-                }
-
-                foreach (var field in BoardFields)
-                {
-                    field.FiledColor = NormalBrush;
-                }
+            if (selectedMoves.Count == 1)
+            {
+                fromField = null;
+                isPlayerMoving = false;
+                DesktopPlayer.SetMoveChoice(selectedMoves[0]);
             }
             else
             {
-                foreach (var field in BoardFields)
+
+            }
+
+            CleanBrushes();
+        }
+
+        private void HandleFromClicked(int row, int column, BoardField clickedField)
+        {
+            CleanBrushes();
+
+            if (isPlayerMoving)
+            {
+                fromField = clickedField;
+                fromField.FiledColor = FromBrush;
+                var figureMoves = AvailableMoves.Where(m => m.From.Row == row && m.From.Column == column).ToList();
+                if (figureMoves.Count == 1 && figureMoves[0] is KillMove move)
                 {
-                    field.FiledColor = NormalBrush;
+                    HandleKillFrom(move);
                 }
-
-                if (isPlayerMoving)
+                else
                 {
-                    fromField = clickedField;
-                    fromField.FiledColor = FromBrush;
-                    var figureMoves = AvailableMoves.Where(m => m.From.Row == row && m.From.Column == column).ToList();
-                    if (figureMoves.Count == 1 && figureMoves[0] is KillMove move)
-                    {
-                        var innerMove = move;
-                        while (innerMove != null)
-                        {
-                            int targetRow = innerMove.Target.Row;
-                            int targetColumn = innerMove.Target.Column;
-                            BoardFields[targetRow * Size + targetColumn].FiledColor = innerMove == move ? TargetBrush : SemiTargetBrush;
-
-                            int killRow = innerMove.Killed.Row;
-                            int killColumn = innerMove.Killed.Column;
-                            BoardFields[killRow * Size + killColumn].FiledColor = KillBrush;
-
-                            innerMove = innerMove.InnerMove;
-                        }
-                    }
-                    else
-                    {
-                        foreach (var figureMove in figureMoves)
-                        {
-                            int targetRow = figureMove.Target.Row;
-                            int targetColumn = figureMove.Target.Column;
-
-                            BoardFields[targetRow * Size + targetColumn].FiledColor = TargetBrush;
-                        }
-                    }
+                    HandleNormalFrom(figureMoves);
                 }
             }
         }
+
+        private void HandleKillFrom(KillMove move)
+        {
+            var innerMove = move;
+            while (innerMove != null)
+            {
+                int targetRow = innerMove.Target.Row;
+                int targetColumn = innerMove.Target.Column;
+                BoardFields[targetRow * Size + targetColumn].FiledColor = innerMove == move ? TargetBrush : SemiTargetBrush;
+
+                int killRow = innerMove.Killed.Row;
+                int killColumn = innerMove.Killed.Column;
+                BoardFields[killRow * Size + killColumn].FiledColor = KillBrush;
+
+                innerMove = innerMove.InnerMove;
+            }
+        }
+
+        private void HandleNormalFrom(List<MoveBase> figureMoves)
+        {
+            foreach (var figureMove in figureMoves)
+            {
+                int targetRow = figureMove.Target.Row;
+                int targetColumn = figureMove.Target.Column;
+
+                BoardFields[targetRow * Size + targetColumn].FiledColor = TargetBrush;
+            }
+        }
+
+        private void CleanBrushes()
+        {
+            foreach (var field in BoardFields)
+            {
+                field.FiledColor = NormalBrush;
+            }
+        }
+
+        #endregion
 
         public void ShowNextMove(IPlayer player)
         {
