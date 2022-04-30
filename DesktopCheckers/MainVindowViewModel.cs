@@ -21,7 +21,9 @@ namespace DesktopCheckers
     public class MainVindowViewModel : IUserInterface, INotifyPropertyChanged
     {
         private static readonly Brush NormalBrush = new SolidColorBrush(Colors.Gray);
-        private static readonly Brush TargetBrush = new SolidColorBrush(Colors.IndianRed);
+        private static readonly Brush SemiTargetBrush = new SolidColorBrush(Colors.LightGreen);
+        private static readonly Brush TargetBrush = new SolidColorBrush(Colors.Green);
+        private static readonly Brush KillBrush = new SolidColorBrush(Colors.Red);
         private static readonly Brush FromBrush = new SolidColorBrush(Colors.LightSlateGray);
 
         private const int Size = 8;
@@ -118,12 +120,31 @@ namespace DesktopCheckers
                     fromField = clickedField;
                     fromField.FiledColor = FromBrush;
                     var figureMoves = AvailableMoves.Where(m => m.From.Row == row && m.From.Column == column).ToList();
-                    foreach (var figureMove in figureMoves)
+                    if (figureMoves.Count == 1 && figureMoves[0] is KillMove move)
                     {
-                        int targetRow = figureMove.Target.Row;
-                        int targetColumn = figureMove.Target.Column;
+                        var innerMove = move;
+                        while (innerMove != null)
+                        {
+                            int targetRow = innerMove.Target.Row;
+                            int targetColumn = innerMove.Target.Column;
+                            BoardFields[targetRow * Size + targetColumn].FiledColor = innerMove == move ? TargetBrush : SemiTargetBrush;
 
-                        BoardFields[targetRow * Size + targetColumn].FiledColor = TargetBrush;
+                            int killRow = innerMove.Killed.Row;
+                            int killColumn = innerMove.Killed.Column;
+                            BoardFields[killRow * Size + killColumn].FiledColor = KillBrush;
+
+                            innerMove = innerMove.InnerMove;
+                        }
+                    }
+                    else
+                    {
+                        foreach (var figureMove in figureMoves)
+                        {
+                            int targetRow = figureMove.Target.Row;
+                            int targetColumn = figureMove.Target.Column;
+
+                            BoardFields[targetRow * Size + targetColumn].FiledColor = TargetBrush;
+                        }
                     }
                 }
             }

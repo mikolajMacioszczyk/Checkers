@@ -77,7 +77,7 @@ namespace Checkers.Models
             if (isStopped && strike.Any())
             {
                 var last = strike.Last();
-                if (last.Target.Row == board.Size - 1 || last.Target.Row == 0)
+                if (Color == FigureColor.White && last.Target.Row == board.Size - 1 || Color == FigureColor.Black && last.Target.Row == 0)
                 {
                     // should also transform to King
                     strike.Remove(last);
