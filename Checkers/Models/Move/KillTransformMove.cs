@@ -8,8 +8,8 @@
         public override void MakeMove(Board board)
         {
             base.MakeMove(board);
-            OldFigure = Target.Figure;
-            Figure newFigure = Target.Figure.Color == Enums.FigureColor.White ? new WhiteKing() : new BlackKing();
+            OldFigure = board.Positions[Target.Row, Target.Column].Figure;
+            Figure newFigure = board.Positions[Target.Row, Target.Column].Figure.Color == Enums.FigureColor.White ? new WhiteKing() : new BlackKing();
             board.Positions[Target.Row, Target.Column].Figure = newFigure;
             board.Replace(OldFigure, newFigure);
         }
