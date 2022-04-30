@@ -3,10 +3,13 @@
     public class Position
     {
         public int Row { get; set; }
+
         public int Column { get; set; }
-
+        
+        [System.Text.Json.Serialization.JsonIgnore]
         private Figure _figure;
-
+        
+        [System.Text.Json.Serialization.JsonIgnore]
         public Figure Figure
         {
             get { return _figure; }
@@ -36,6 +39,16 @@
         public override string ToString()
         {
             return $"[{Row}, {Column}]";
+        }
+
+        public Position Copy()
+        {
+            return new Position()
+            {
+                Row = Row,
+                Column = Column,
+                Figure = null
+            };
         }
 
         public override bool Equals(object? obj)

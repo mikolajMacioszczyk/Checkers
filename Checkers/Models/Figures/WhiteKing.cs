@@ -10,7 +10,13 @@ namespace Checkers.Models
 
         public override Figure Copy()
         {
-            return new WhiteKing() { CurrentPosition = CurrentPosition};
+            var position = CurrentPosition?.Copy();
+            var copy = new WhiteKing();
+            if (position != null)
+            {
+                position.Figure = copy;
+            }
+            return copy;
         }
     }
 }

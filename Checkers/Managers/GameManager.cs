@@ -41,7 +41,7 @@ namespace Checkers.Managers
             _userInterface.ShowBoard(Board);
             _userInterface.ShowNextMove(player);
 
-            var move = player.ChooseMove(Board);
+            var move = player.ChooseMove(Board.DeepCopy());
 
             while (!ValidateCanMove(move, player.Color))
             {

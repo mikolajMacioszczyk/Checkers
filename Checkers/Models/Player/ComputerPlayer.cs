@@ -39,7 +39,6 @@ namespace Checkers.Models.Player
 
             foreach (var testedMove in allMoves)
             {
-                // serialization to check
                 testedMove.MakeMove(currentState);
                 var result = Max(currentState, 1);
                 moveResults.Add((result, testedMove));

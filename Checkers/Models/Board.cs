@@ -6,6 +6,7 @@ namespace Checkers.Models
     // introduce interfaces
     public class Board
     {
+        [System.Text.Json.Serialization.JsonIgnore]
         public Position[,] Positions { get; private set; }
         public int Size { get; private set; }
         public int FiguresCount { get; private set; }

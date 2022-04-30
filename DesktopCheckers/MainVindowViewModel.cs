@@ -28,6 +28,7 @@ namespace DesktopCheckers
         private static readonly Brush FromBrush = new SolidColorBrush(Colors.LightSlateGray);
 
         private const int Size = 8;
+        private const int Level = 4;
 
         private string message;
         private bool isPlayerMoving;
@@ -77,7 +78,7 @@ namespace DesktopCheckers
                 isPlayerMoving = true;
             };
 
-            var blackPlayer = new ComputerPlayer(new TestEvaluation(), 2);
+            var blackPlayer = new ComputerPlayer(new TestEvaluation(), Level);
             await Task.Run(() =>
             {
                 gameManager.StartGame(whitePlayer, blackPlayer);
