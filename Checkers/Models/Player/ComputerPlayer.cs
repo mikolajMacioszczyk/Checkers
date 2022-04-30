@@ -21,6 +21,8 @@ namespace Checkers.Models.Player
 
             var choice = allMoves.OrderBy(_ => random.Next()).FirstOrDefault();
 
+            Thread.Sleep(1500);
+
             return choice;
         }
     }

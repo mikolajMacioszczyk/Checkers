@@ -35,7 +35,7 @@ namespace DesktopCheckers
                     var position = field.Position;
                     if (position != null)
                     {
-                        (DataContext as MainVindowViewModel)?.OnFieldClicked(position.Row, position.Column);
+                        (DataContext as MainVindowViewModel)?.OnFieldClicked(position.Row, position.Column, field);
                     }
                 }
             }

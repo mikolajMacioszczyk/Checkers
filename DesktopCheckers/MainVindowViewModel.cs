@@ -20,12 +20,15 @@ namespace DesktopCheckers
 {
     public class MainVindowViewModel : IUserInterface, INotifyPropertyChanged
     {
-        private static readonly Brush GrayBrush = new SolidColorBrush(Colors.Gray);
-        private static readonly Brush RedBrush = new SolidColorBrush(Colors.IndianRed);
+        private static readonly Brush NormalBrush = new SolidColorBrush(Colors.Gray);
+        private static readonly Brush TargetBrush = new SolidColorBrush(Colors.IndianRed);
+        private static readonly Brush FromBrush = new SolidColorBrush(Colors.LightSlateGray);
+
         private const int Size = 8;
 
         private string message;
         private bool isPlayerMoving;
+        private BoardField fromField;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -51,7 +54,7 @@ namespace DesktopCheckers
             {
                 for (int column = 0; column < Size; column++)
                 {
-                    BoardFields[row * 8 + column] = new BoardField() { FiledColor = GrayBrush };
+                    BoardFields[row * 8 + column] = new BoardField() { FiledColor = NormalBrush };
                 }
             }
         }
@@ -78,22 +81,50 @@ namespace DesktopCheckers
             });
         }
 
-        public void OnFieldClicked(int row, int column)
+        public void OnFieldClicked(int row, int column, BoardField clickedField)
         {
-            foreach (var field in BoardFields)
+            if (clickedField.FiledColor == TargetBrush)
             {
-                field.FiledColor = GrayBrush;
-            }
+                var selectedMoves = AvailableMoves.Where(m => 
+                    m.From.Row == fromField.Position.Row && m.From.Column == fromField.Position.Column
+                    && m.Target.Row == row && m.Target.Column == column)
+                    .ToList();
 
-            if (isPlayerMoving)
-            {
-                var figureMoves = AvailableMoves.Where(m => m.From.Row == row && m.From.Column == column).ToList();
-                foreach (var figureMove in figureMoves)
+                if (selectedMoves.Count == 1)
                 {
-                    int targetRow = figureMove.Target.Row;
-                    int targetColumn = figureMove.Target.Column;
-                    
-                    BoardFields[targetRow * Size + targetColumn].FiledColor = RedBrush;
+                    fromField = null;
+                    isPlayerMoving = false;
+                    DesktopPlayer.SetMoveChoice(selectedMoves[0]);
+                }
+                else
+                {
+
+                }
+
+                foreach (var field in BoardFields)
+                {
+                    field.FiledColor = NormalBrush;
+                }
+            }
+            else
+            {
+                foreach (var field in BoardFields)
+                {
+                    field.FiledColor = NormalBrush;
+                }
+
+                if (isPlayerMoving)
+                {
+                    fromField = clickedField;
+                    fromField.FiledColor = FromBrush;
+                    var figureMoves = AvailableMoves.Where(m => m.From.Row == row && m.From.Column == column).ToList();
+                    foreach (var figureMove in figureMoves)
+                    {
+                        int targetRow = figureMove.Target.Row;
+                        int targetColumn = figureMove.Target.Column;
+
+                        BoardFields[targetRow * Size + targetColumn].FiledColor = TargetBrush;
+                    }
                 }
             }
         }
