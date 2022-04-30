@@ -1,13 +1,10 @@
 ﻿using Checkers.Enums;
 using Checkers.Interfaces;
-using System.Text.Json;
 
 namespace Checkers.Models.Player
 {
     public class ComputerPlayer : IPlayer
     {
-        private static readonly Random random = new Random();
-
         private readonly IBoardEvaluation _evaluation;
         private readonly int _depth;
 
@@ -40,7 +37,8 @@ namespace Checkers.Models.Player
             foreach (var testedMove in allMoves)
             {
                 testedMove.MakeMove(currentState);
-                var result = Max(currentState, 1);
+                int result = Color == FigureColor.White ? 
+                    Max(currentState, 1) : Min(currentState, 1);
                 moveResults.Add((result, testedMove));
                 testedMove.UndoMove(currentState);
             }
@@ -65,7 +63,7 @@ namespace Checkers.Models.Player
             foreach (var testedMove in allMoves)
             {
                 testedMove.MakeMove(state);
-                var result = Min(state, currentDepth);
+                var result = Min(state, currentDepth + 1);
                 maxEvaluation = Math.Max(maxEvaluation, result);
                 testedMove.UndoMove(state);
             }
