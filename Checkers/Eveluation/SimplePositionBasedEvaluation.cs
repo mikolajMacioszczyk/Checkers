@@ -51,15 +51,15 @@ namespace Checkers.Eveluation
         {
             if (figure is WhiteKing)
             {
-                return 20;
+                return 30;
             }
 
             if (row == 0 || column == 0 || column == board.Size - 1)
             {
-                return 5;
+                return 10;
             }
             
-            return 4;
+            return 8;
         }
 
         public int GetWhiteFigurePositionEvaluation(Figure figure, int row, int column, Board board)
@@ -72,6 +72,10 @@ namespace Checkers.Eveluation
                 {
                     bonus += 2;
                 }
+                else
+                {
+                    bonus -= 2;
+                }
             }
             if (row - 1 >= 0 && column + 1 < board.Size)
             {
@@ -79,6 +83,10 @@ namespace Checkers.Eveluation
                 if (positionBeforeRight.Figure != null && positionBeforeRight.Figure.Color == Enums.FigureColor.White)
                 {
                     bonus += 2;
+                }
+                else
+                {
+                    bonus -= 2;
                 }
             }
             return bonus;
@@ -94,11 +102,19 @@ namespace Checkers.Eveluation
                 {
                     bonus += -2;
                 }
+                else
+                {
+                    bonus += 2;
+                }
             }
             if (row + 1 < board.Size - 1 && column + 1 < board.Size)
             {
                 var positionBeforeRight = board.Positions[row + 1, column + 1];
                 if (positionBeforeRight.Figure != null && positionBeforeRight.Figure.Color == Enums.FigureColor.Black)
+                {
+                    bonus += -2;
+                }
+                else
                 {
                     bonus += 2;
                 }
@@ -110,15 +126,15 @@ namespace Checkers.Eveluation
         {
             if (figure is BlackKing)
             {
-                return -20;
+                return -30;
             }
 
             if (row == board.Size - 1 || column == 0 || column == board.Size - 1)
             {
-                return -5;
+                return -10;
             }
 
-            return -4;
+            return -8;
         }
     }
 }

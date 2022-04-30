@@ -42,10 +42,10 @@ namespace Checkers.Models.Player
                 moveResults.Add((result, testedMove));
                 testedMove.UndoMove(currentState);
             }
+            int selectedEvaluation = Color == FigureColor.White ? 
+                moveResults.Max(m => m.Item1) : moveResults.Min(m => m.Item1);
 
-            var maxEvaluation = moveResults.Max(m => m.Item1);
-
-            var choice = moveResults.First(m => m.Item1 == maxEvaluation).Item2;
+            var choice = moveResults.First(m => m.Item1 == selectedEvaluation).Item2;
 
             return choice;
         }
