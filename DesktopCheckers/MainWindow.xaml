@@ -48,14 +48,14 @@
                     <Ellipse Visibility="{Binding IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
                 </Grid >
             </StackPanel>
-            <StackPanel Grid.Row="0" Grid.Column="3" Background="{Binding BoardFields[58].FiledColor}" MouseLeftButtonUp="StackPanel_MouseLeftButtonUp" >
-                <Grid Visibility="{Binding BoardFields[58].IsWhite}">
+            <StackPanel Grid.Row="0" Grid.Column="3" DataContext="{Binding BoardFields[58]}" Background="{Binding FiledColor}" MouseLeftButtonUp="StackPanel_MouseLeftButtonUp" >
+                <Grid Visibility="{Binding IsWhite}">
                     <Ellipse Width="80" Height="80" Fill="White" Margin="10" />
-                    <Ellipse Visibility="{Binding BoardFields[58].IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
+                    <Ellipse Visibility="{Binding IsKing}" Width="25" Height="25" Fill="Black" Margin="10" />
                 </Grid>
-                <Grid Visibility="{Binding BoardFields[58].IsBlack}">
+                <Grid Visibility="{Binding IsBlack}">
                     <Ellipse Width="80" Height="80" Fill="Black" Margin="10" />
-                    <Ellipse Visibility="{Binding BoardFields[58].IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
+                    <Ellipse Visibility="{Binding IsKing}" Width="25" Height="25" Fill="White" Margin="10" />
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Row="0" Grid.Column="5" DataContext="{Binding BoardFields[60]}" Background="{Binding FiledColor}" MouseLeftButtonUp="StackPanel_MouseLeftButtonUp" >

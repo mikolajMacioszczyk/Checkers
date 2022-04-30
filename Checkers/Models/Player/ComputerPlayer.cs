@@ -49,8 +49,6 @@ namespace Checkers.Models.Player
 
             var choice = moveResults.First(m => m.Item1 == maxEvaluation).Item2;
 
-            Thread.Sleep(1500);
-
             return choice;
         }
 
