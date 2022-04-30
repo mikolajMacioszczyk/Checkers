@@ -207,6 +207,7 @@ namespace DesktopCheckers
                     Message = $"Game over!!! Draw after {moveCount} moves";
                     break;
             }
+            MessageBox.Show(Message);
         }
 
         public void ShowBoard(Board board)

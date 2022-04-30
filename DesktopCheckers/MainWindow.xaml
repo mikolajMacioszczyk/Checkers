@@ -11,7 +11,7 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
             <Button x:Name="Start" Content="StartGame" Click="Start_Click" />
-            <TextBlock Text="{Binding Message}" />
+            <TextBlock FontSize="15" Text="{Binding Message}" />
         </StackPanel>
         
         <Grid>
