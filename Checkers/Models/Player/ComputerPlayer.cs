@@ -14,7 +14,7 @@ namespace Checkers.Models.Player
             _depth = depth;
         }
 
-        public string Name => "Computer";
+        public string Name { get; set; } = "Computer";
 
         public FigureColor Color { get; set; }
 

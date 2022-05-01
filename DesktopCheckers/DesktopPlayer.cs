@@ -26,7 +26,12 @@ namespace DesktopCheckers
 
         public MoveBase ChooseMove(Board currentState)
         {
-            StartChoice(currentState);
+            var availableMoves = currentState.GetAllAvailableMoves(Color).ToList();
+            if (!availableMoves.Any())
+            {
+                return null;
+            }
+            StartChoice(availableMoves);
             while (_move is null)
             {
                 Thread.Sleep(100);
@@ -34,9 +39,8 @@ namespace DesktopCheckers
             return _move;
         }
 
-        private void StartChoice(Board currentState)
+        private void StartChoice(List<MoveBase> availableMoves)
         {
-            var availableMoves = currentState.GetAllAvailableMoves(Color).ToList();
             _move = null;
             ChooseStarted?.Invoke(availableMoves);
         }

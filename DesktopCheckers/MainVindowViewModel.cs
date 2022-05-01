@@ -67,9 +67,9 @@ namespace DesktopCheckers
         public async Task StartGame()
         {
             var gameManager = new GameManager(this);
-            var whitePlayer = DesktopPlayer;
-            whitePlayer.Name = "Mikołaj";
-            whitePlayer.ChooseStarted += (allMoves) =>
+            var blackPlayer = DesktopPlayer;
+            blackPlayer.Name = "Mikołaj";
+            blackPlayer.ChooseStarted += (allMoves) =>
             {
                 AvailableMoves.Clear();
                 foreach (var move in allMoves)
@@ -79,7 +79,7 @@ namespace DesktopCheckers
                 isPlayerMoving = true;
             };
 
-            var blackPlayer = new ComputerPlayerWithAlphaBeta(_evaluation, Level);
+            var whitePlayer = new ComputerPlayerWithAlphaBeta(_evaluation, Level);
             await Task.Run(() =>
             {
                 gameManager.StartGame(whitePlayer, blackPlayer);

@@ -5,10 +5,13 @@ using ConsoleCheckers;
 
 var consoleUserInterface = new ConsoleUserInterface();
 var manager = new GameManager(consoleUserInterface);
-var player1 = new ConsolePlayer();
-player1.Name = "Mikoo";
-var evaluation = new TestEvaluation();
-var player2 = new ComputerPlayer(evaluation, 4);
+//var player1 = new ConsolePlayer();
+//player1.Name = "Mikoo";
+var evaluation = new SimplePositionBasedEvaluation();
+var player2 = new ComputerPlayerWithAlphaBeta(evaluation, 9);
+player2.Name = "ComputerPlayerWithAlphaBeta";
+var player1 = new ComputerPlayer(evaluation, 7);
+player1.Name = "ComputerPlayer";
 
 manager.StartGame(player1, player2);
 

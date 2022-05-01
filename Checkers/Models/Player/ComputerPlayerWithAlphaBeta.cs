@@ -1,7 +1,7 @@
 ﻿using Checkers.Enums;
 using Checkers.Interfaces;
 
-namespace Checkers.Models
+namespace Checkers.Models.Player
 {
     public class ComputerPlayerWithAlphaBeta : IPlayer
     {
@@ -14,7 +14,7 @@ namespace Checkers.Models
             _depth = depth;
         }
 
-        public string Name => "Computer";
+        public string Name { get; set; } = "Computer";
 
         public FigureColor Color { get; set; }
 
@@ -66,7 +66,7 @@ namespace Checkers.Models
                 moveResults.Add((result, testedMove));
                 testedMove.UndoMove(currentState);
             }
-            int selectedEvaluation = Color == FigureColor.White ? 
+            int selectedEvaluation = Color == FigureColor.White ?
                 moveResults.Max(m => m.Item1) : moveResults.Min(m => m.Item1);
 
             var choice = moveResults.First(m => m.Item1 == selectedEvaluation).Item2;
@@ -138,7 +138,7 @@ namespace Checkers.Models
             return minEvaluation;
         }
 
-        private FigureColor OppositeColor(FigureColor color) => 
+        private FigureColor OppositeColor(FigureColor color) =>
             color == FigureColor.White ? FigureColor.Black : FigureColor.White;
     }
 }
