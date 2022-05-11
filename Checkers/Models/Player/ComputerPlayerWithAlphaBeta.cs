@@ -1,4 +1,5 @@
 ﻿using Checkers.Enums;
+using Checkers.Helpers;
 using Checkers.Interfaces;
 
 namespace Checkers.Models.Player
@@ -45,8 +46,8 @@ namespace Checkers.Models.Player
                 int result = 0;
                 if (Color == FigureColor.White)
                 {
-                    // minimazing on second step
-                    result = Min(currentState, 1, alpha, betha);
+                    // minimazing on second step 
+                    result = Min(currentState, 1, alpha, betha, CheckersHelper.Opposite(Color));
                     if (result > alpha)
                     {
                         // but maximizing on this
@@ -56,7 +57,7 @@ namespace Checkers.Models.Player
                 else
                 {
                     // maximizing on second step
-                    result = Max(currentState, 1, alpha, betha);
+                    result = Max(currentState, 1, alpha, betha, CheckersHelper.Opposite(Color));
                     if (result < betha)
                     {
                         // but minimizing on this
@@ -74,20 +75,20 @@ namespace Checkers.Models.Player
             return choice;
         }
 
-        private int Max(Board state, int currentDepth, int alpha, int betha)
+        private int Max(Board state, int currentDepth, int alpha, int betha, FigureColor currentColor)
         {
             if (currentDepth == _depth)
             {
                 return _evaluation.Evaluate(state);
             }
 
-            var allMoves = state.GetAllAvailableMoves(Color);
+            var allMoves = state.GetAllAvailableMoves(currentColor);
             int maxEvaluation = int.MinValue;
 
             foreach (var testedMove in allMoves)
             {
                 testedMove.MakeMove(state);
-                var result = Min(state, currentDepth + 1, alpha, betha);
+                var result = Min(state, currentDepth + 1, alpha, betha, CheckersHelper.Opposite(currentColor));
                 testedMove.UndoMove(state);
 
                 // algorithm has seen bether option already
@@ -106,20 +107,20 @@ namespace Checkers.Models.Player
             return maxEvaluation;
         }
 
-        private int Min(Board state, int currentDepth, int alpha, int betha)
+        private int Min(Board state, int currentDepth, int alpha, int betha, FigureColor currentColor)
         {
             if (currentDepth == _depth)
             {
                 return _evaluation.Evaluate(state);
             }
 
-            var allMoves = state.GetAllAvailableMoves(OppositeColor(Color));
+            var allMoves = state.GetAllAvailableMoves(currentColor);
             int minEvaluation = int.MaxValue;
 
             foreach (var testedMove in allMoves)
             {
                 testedMove.MakeMove(state);
-                var result = Max(state, currentDepth + 1, alpha, betha);
+                var result = Max(state, currentDepth + 1, alpha, betha, CheckersHelper.Opposite(currentColor));
                 testedMove.UndoMove(state);
 
                 // algorithm has seen bether option already
@@ -137,8 +138,5 @@ namespace Checkers.Models.Player
 
             return minEvaluation;
         }
-
-        private FigureColor OppositeColor(FigureColor color) =>
-            color == FigureColor.White ? FigureColor.Black : FigureColor.White;
     }
 }

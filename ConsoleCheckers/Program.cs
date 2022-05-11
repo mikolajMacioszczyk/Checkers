@@ -8,12 +8,12 @@ var manager = new GameManager(consoleUserInterface);
 //var player1 = new ConsolePlayer();
 //player1.Name = "Mikoo";
 var evaluation = new SimplePositionBasedEvaluation();
-var player2 = new ComputerPlayerWithAlphaBeta(evaluation, 9);
-player2.Name = "ComputerPlayerWithAlphaBeta";
-var player1 = new ComputerPlayer(evaluation, 7);
-player1.Name = "ComputerPlayer";
+var aplhaBethaPlayer = new ComputerPlayerWithAlphaBeta(evaluation, 9);
+aplhaBethaPlayer.Name = "ComputerPlayerWithAlphaBeta";
+var ordinaryPlayer = new ComputerPlayer(evaluation, 9);
+ordinaryPlayer.Name = "ComputerPlayer";
 
-manager.StartGame(player1, player2);
+manager.StartGame(ordinaryPlayer, aplhaBethaPlayer);
 
 Console.WriteLine("Press ENTER to continue");
 Console.ReadLine();
