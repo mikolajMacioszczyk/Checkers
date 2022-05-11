@@ -29,7 +29,7 @@ namespace DesktopCheckers
         private static readonly IBoardEvaluation _evaluation = new SimplePositionBasedEvaluation();
 
         private const int Size = 8;
-        private const int Level = 9;
+        private const int Level = 7;
 
         private string message;
         private bool isPlayerMoving;
@@ -67,9 +67,9 @@ namespace DesktopCheckers
         public async Task StartGame()
         {
             var gameManager = new GameManager(this);
-            var blackPlayer = DesktopPlayer;
-            blackPlayer.Name = "Mikołaj";
-            blackPlayer.ChooseStarted += (allMoves) =>
+            var whitePlayer = DesktopPlayer;
+            whitePlayer.Name = "Mikołaj";
+            whitePlayer.ChooseStarted += (allMoves) =>
             {
                 AvailableMoves.Clear();
                 foreach (var move in allMoves)
@@ -79,7 +79,7 @@ namespace DesktopCheckers
                 isPlayerMoving = true;
             };
 
-            var whitePlayer = new ComputerPlayerWithAlphaBeta(_evaluation, Level);
+            var blackPlayer = new ComputerPlayer(_evaluation, Level);
             await Task.Run(() =>
             {
                 gameManager.StartGame(whitePlayer, blackPlayer);

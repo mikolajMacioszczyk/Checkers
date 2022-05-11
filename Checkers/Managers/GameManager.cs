@@ -45,7 +45,7 @@ namespace Checkers.Managers
 
             while (!ValidateCanMove(move, player.Color))
             {
-                move = player.ChooseMove(Board);
+                move = player.ChooseMove(Board.DeepCopy());
                 _userInterface.ShowMessage("Move not permitted. Try again");
             }
 

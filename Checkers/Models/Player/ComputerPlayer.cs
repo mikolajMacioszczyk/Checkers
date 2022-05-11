@@ -1,4 +1,5 @@
 ﻿using Checkers.Enums;
+using Checkers.Helpers;
 using Checkers.Interfaces;
 
 namespace Checkers.Models.Player
@@ -38,7 +39,7 @@ namespace Checkers.Models.Player
             {
                 testedMove.MakeMove(currentState);
                 int result = Color == FigureColor.White ? 
-                    Min(currentState, 1) : Max(currentState, 1);
+                    Min(currentState, 1, CheckersHelper.Opposite(Color)) : Max(currentState, 1, CheckersHelper.Opposite(Color));
                 moveResults.Add((result, testedMove));
                 testedMove.UndoMove(currentState);
             }
@@ -50,20 +51,20 @@ namespace Checkers.Models.Player
             return choice;
         }
 
-        private int Max(Board state, int currentDepth)
+        private int Max(Board state, int currentDepth, FigureColor currentColor)
         {
             if (currentDepth == _depth)
             {
                 return _evaluation.Evaluate(state);
             }
 
-            var allMoves = state.GetAllAvailableMoves(Color);
+            var allMoves = state.GetAllAvailableMoves(currentColor);
             int maxEvaluation = int.MinValue;
 
             foreach (var testedMove in allMoves)
             {
                 testedMove.MakeMove(state);
-                var result = Min(state, currentDepth + 1);
+                var result = Min(state, currentDepth + 1, CheckersHelper.Opposite(currentColor));
                 maxEvaluation = Math.Max(maxEvaluation, result);
                 testedMove.UndoMove(state);
             }
@@ -71,28 +72,25 @@ namespace Checkers.Models.Player
             return maxEvaluation;
         }
 
-        private int Min(Board state, int currentDepth)
+        private int Min(Board state, int currentDepth, FigureColor currentColor)
         {
             if (currentDepth == _depth)
             {
                 return _evaluation.Evaluate(state);
             }
 
-            var allMoves = state.GetAllAvailableMoves(OppositeColor(Color));
+            var allMoves = state.GetAllAvailableMoves(currentColor);
             int minEvaluation = int.MaxValue;
 
             foreach (var testedMove in allMoves)
             {
                 testedMove.MakeMove(state);
-                var result = Max(state, currentDepth + 1);
+                var result = Max(state, currentDepth + 1, CheckersHelper.Opposite(currentColor));
                 minEvaluation = Math.Min(minEvaluation, result);
                 testedMove.UndoMove(state);
             }
 
             return minEvaluation;
         }
-
-        private FigureColor OppositeColor(FigureColor color) => 
-            color == FigureColor.White ? FigureColor.Black : FigureColor.White;
     }
 }
