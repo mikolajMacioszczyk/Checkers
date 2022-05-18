@@ -3,7 +3,10 @@ using Checkers.Models;
 
 namespace Checkers.Eveluation
 {
-    public class SimplePositionBasedEvaluation : IBoardEvaluation
+    /// <summary>
+    /// Gives bonus points for friends on your bag and minus points for enemy on back
+    /// </summary>
+    public class ClustersEvaluation : IBoardEvaluation
     {
         public int Evaluate(Board board)
         {
@@ -32,32 +35,13 @@ namespace Checkers.Eveluation
             switch (figure.Color)
             {
                 case Enums.FigureColor.White:
-                    var whiteValue = GetWhiteFigureEvaluation(figure, row, column, board);
-                    whiteValue += GetWhiteFigurePositionEvaluation(figure, row, column, board);
-                    return whiteValue;
+                    return GetWhiteFigurePositionEvaluation(row, column, board);
                 default:
-                    var blackValue = GetBlackFigureEvaluation(figure, row, column, board);
-                    blackValue += GetBlackFigurePositionEvaluation(figure, row, column, board);
-                    return blackValue;
+                    return GetBlackFigurePositionEvaluation(row, column, board);
             }
         }
 
-        public int GetWhiteFigureEvaluation(Figure figure, int row, int column, Board board)
-        {
-            if (figure is WhiteKing)
-            {
-                return 30;
-            }
-
-            if (row == 0 || column == 0 || column == board.Size - 1)
-            {
-                return 10;
-            }
-            
-            return 8;
-        }
-
-        public int GetWhiteFigurePositionEvaluation(Figure figure, int row, int column, Board board)
+        public int GetWhiteFigurePositionEvaluation(int row, int column, Board board)
         {
             var bonus = 0;
             if (row - 1 >= 0 && column - 1 >= 0)
@@ -87,7 +71,7 @@ namespace Checkers.Eveluation
             return bonus;
         }
 
-        public int GetBlackFigurePositionEvaluation(Figure figure, int row, int column, Board board)
+        public int GetBlackFigurePositionEvaluation(int row, int column, Board board)
         {
             var bonus = 0;
             if (row + 1 < board.Size - 1 && column - 1 >= 0)
@@ -115,21 +99,6 @@ namespace Checkers.Eveluation
                 }
             }
             return bonus;
-        }
-
-        public int GetBlackFigureEvaluation(Figure figure, int row, int column, Board board)
-        {
-            if (figure is BlackKing)
-            {
-                return -30;
-            }
-
-            if (row == board.Size - 1 || column == 0 || column == board.Size - 1)
-            {
-                return -10;
-            }
-
-            return -8;
         }
     }
 }

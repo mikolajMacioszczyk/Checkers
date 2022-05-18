@@ -26,7 +26,7 @@ namespace DesktopCheckers
         private static readonly Brush TargetBrush = new SolidColorBrush(Colors.Green);
         private static readonly Brush KillBrush = new SolidColorBrush(Colors.Red);
         private static readonly Brush FromBrush = new SolidColorBrush(Colors.LightSlateGray);
-        private static readonly IBoardEvaluation _evaluation = new SimplePositionBasedEvaluation();
+        private static readonly IBoardEvaluation _evaluation = new TestEvaluation();
 
         private const int Size = 8;
         private const int Level = 7;

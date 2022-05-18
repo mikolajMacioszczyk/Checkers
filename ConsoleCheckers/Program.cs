@@ -7,10 +7,10 @@ var consoleUserInterface = new ConsoleUserInterface();
 var manager = new GameManager(consoleUserInterface);
 //var player1 = new ConsolePlayer();
 //player1.Name = "Mikoo";
-var evaluation = new SimplePositionBasedEvaluation();
-var aplhaBethaPlayer = new ComputerPlayerWithAlphaBeta(evaluation, 9);
+var evaluation = new TestEvaluation();
+var aplhaBethaPlayer = new ComputerPlayerWithAlphaBeta(evaluation, 7);
 aplhaBethaPlayer.Name = "ComputerPlayerWithAlphaBeta";
-var ordinaryPlayer = new ComputerPlayer(evaluation, 9);
+var ordinaryPlayer = new ComputerPlayer(evaluation, 7);
 ordinaryPlayer.Name = "ComputerPlayer";
 
 manager.StartGame(ordinaryPlayer, aplhaBethaPlayer);

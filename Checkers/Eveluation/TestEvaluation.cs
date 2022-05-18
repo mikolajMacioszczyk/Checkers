@@ -18,7 +18,7 @@ namespace Checkers.Eveluation
                         var position = board.Positions[row, column];
                         if (position.Figure != null)
                         {
-                            sum += GetFigureEvaluation(position.Figure, row, column, board.Size);
+                            sum += GetFigureEvaluation(position.Figure, row, column, board);
                         }
                     }
                 }
@@ -27,51 +27,109 @@ namespace Checkers.Eveluation
             return sum;
         }
 
-        public int GetFigureEvaluation(Figure figure, int row, int column, int size)
+        public int GetFigureEvaluation(Figure figure, int row, int column, Board board)
         {
             switch (figure.Color)
             {
                 case Enums.FigureColor.White:
-                    return GetWhiteFigureEvaluation(figure, row, column, size);
+                    var whiteValue = GetWhiteFigureEvaluation(figure, row, column, board);
+                    whiteValue += GetWhiteFigurePositionEvaluation(figure, row, column, board);
+                    return whiteValue;
                 default:
-                    return GetBlackFigureEvaluation(figure, row, column, size);
+                    var blackValue = GetBlackFigureEvaluation(figure, row, column, board);
+                    blackValue += GetBlackFigurePositionEvaluation(figure, row, column, board);
+                    return blackValue;
             }
         }
 
-        public int GetWhiteFigureEvaluation(Figure figure, int row, int column, int size)
+        public int GetWhiteFigureEvaluation(Figure figure, int row, int column, Board board)
         {
             if (figure is WhiteKing)
             {
+                return 30;
+            }
+
+            if (row == 0 || column == 0 || column == board.Size - 1)
+            {
                 return 10;
             }
-
-            if (row < size / 3)
-            {
-                return 2;
-            }
-            else if (row < 2 * size / 3)
-            {
-                return 3;
-            }
-            return 5;
+            
+            return 8;
         }
 
-        public int GetBlackFigureEvaluation(Figure figure, int row, int column, int size)
+        public int GetWhiteFigurePositionEvaluation(Figure figure, int row, int column, Board board)
+        {
+            var bonus = 0;
+            if (row - 1 >= 0 && column - 1 >= 0)
+            {
+                var positionBeforeLeft = board.Positions[row - 1, column - 1];
+                if (positionBeforeLeft.Figure != null && positionBeforeLeft.Figure.Color == Enums.FigureColor.White)
+                {
+                    bonus += 2;
+                }
+                else
+                {
+                    bonus -= 2;
+                }
+            }
+            if (row - 1 >= 0 && column + 1 < board.Size)
+            {
+                var positionBeforeRight = board.Positions[row - 1, column + 1];
+                if (positionBeforeRight.Figure != null && positionBeforeRight.Figure.Color == Enums.FigureColor.White)
+                {
+                    bonus += 2;
+                }
+                else
+                {
+                    bonus -= 2;
+                }
+            }
+            return bonus;
+        }
+
+        public int GetBlackFigurePositionEvaluation(Figure figure, int row, int column, Board board)
+        {
+            var bonus = 0;
+            if (row + 1 < board.Size - 1 && column - 1 >= 0)
+            {
+                var positionBeforeLeft = board.Positions[row + 1, column - 1];
+                if (positionBeforeLeft.Figure != null && positionBeforeLeft.Figure.Color == Enums.FigureColor.Black)
+                {
+                    bonus += -2;
+                }
+                else
+                {
+                    bonus += 2;
+                }
+            }
+            if (row + 1 < board.Size - 1 && column + 1 < board.Size)
+            {
+                var positionBeforeRight = board.Positions[row + 1, column + 1];
+                if (positionBeforeRight.Figure != null && positionBeforeRight.Figure.Color == Enums.FigureColor.Black)
+                {
+                    bonus += -2;
+                }
+                else
+                {
+                    bonus += 2;
+                }
+            }
+            return bonus;
+        }
+
+        public int GetBlackFigureEvaluation(Figure figure, int row, int column, Board board)
         {
             if (figure is BlackKing)
+            {
+                return -30;
+            }
+
+            if (row == board.Size - 1 || column == 0 || column == board.Size - 1)
             {
                 return -10;
             }
 
-            if (row < size / 3)
-            {
-                return 5;
-            }
-            else if (row < 2 * size / 3)
-            {
-                return 3;
-            }
-            return 2;
+            return -8;
         }
     }
 }
