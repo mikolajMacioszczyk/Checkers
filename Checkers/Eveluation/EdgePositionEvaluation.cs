@@ -43,22 +43,22 @@ namespace Checkers.Eveluation
 
         public int GetWhiteFigureEvaluation(Figure figure, int row, int column, Board board)
         {
-            if (row == 0 || column == 0 || column == board.Size - 1)
+            if (row == 0 || column == 0 || column == board.Size - 1 || row == board.Size - 1)
             {
-                return 10;
+                return 2;
             }
 
-            return 5;
+            return 1;
         }
 
         public int GetBlackFigureEvaluation(Figure figure, int row, int column, Board board)
         {
-            if (row == board.Size - 1 || column == 0 || column == board.Size - 1)
+            if (row == board.Size - 1 || column == 0 || column == board.Size - 1 || row == board.Size - 1)
             {
-                return -10;
+                return -2;
             }
 
-            return -5;
+            return -1;
         }
     }
 }

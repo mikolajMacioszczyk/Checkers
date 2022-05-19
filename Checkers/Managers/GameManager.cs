@@ -20,7 +20,7 @@ namespace Checkers.Managers
             _userInterface = userInterface;
         }
 
-        public void StartGame(IPlayer whitePlayer, IPlayer blackPlayer)
+        public double StartGame(IPlayer whitePlayer, IPlayer blackPlayer)
         {
             WhitePlayer = whitePlayer;
             whitePlayer.AssignColor(FigureColor.White);
@@ -32,8 +32,15 @@ namespace Checkers.Managers
             Board = new Board();
             Board.Reset(8, 12);
 
+            var startTime = DateTime.Now;
             var result = NextMove(WhitePlayer, ref counter, 0);
+            var delay = (DateTime.Now - startTime).TotalMilliseconds;
+
+            //Console.WriteLine($"Time: {delay}");
+
             _userInterface.GameOver(WhitePlayer, BlackPlayer, result, counter);
+
+            return delay;
         }
 
         private GameResult NextMove(IPlayer player, ref int counter, int onlyKingsMove)
@@ -64,6 +71,12 @@ namespace Checkers.Managers
                     return GameResult.Draw;
                 }
             }
+
+            // for test purpose
+            //if (counter >= 6)
+            //{
+            //    return GameResult.Draw;
+            //}
 
             var nextPlayer = player.Color == FigureColor.White ? BlackPlayer : WhitePlayer;
             return NextMove(nextPlayer, ref counter, onlyKingsMove);
