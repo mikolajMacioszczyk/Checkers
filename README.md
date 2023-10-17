@@ -6,7 +6,7 @@ The "Checkers" project is a comprehensive checkers application consisting of two
 
 ## Requirements
 
-1. .NET Core platform installed
+1. .NET 6 platform installed
 
 ## Running the Desktop Application
 
@@ -38,7 +38,7 @@ The console application allows you to test the Minimax algorithm with alpha-beta
 
 - The desktop application enables interactive gameplay against a computer opponent.
 
-Thank you for using our "CheckersGame" application! We hope you enjoy playing checkers and testing the algorithm using the console application.
+Thank you for using our "Checkers" application! We hope you enjoy playing checkers and testing the algorithm using the console application.
 
 # Sreens from desktop application
 ![DesktopCheckers1](https://github.com/mikolajMacioszczyk/Checkers/assets/57719701/036570d4-eb6c-4a11-a073-f81c839664b9)
